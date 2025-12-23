@@ -18,16 +18,16 @@ const ServicesComponentMinimal = () => {
   }, []);
 
   const services = [
-  { name: "Web Development", image: "/services/web-development.png" },
-  { name: "App Development", image: "/services/app-development.png" },
-  { name: "AI Applications", image: "/services/ai-applications.png" },
-  { name: "Data Driven Products", image: "/services/data-driven-products.png" },
-  { name: "Blockchain Technology", image: "/services/blockchain-technology.png" },
-  { name: "UI/UX", image: "/services/ui-ux.png" },
-  { name: "Logo Designing", image: "/services/logo-designing.png" },
-  { name: "Rapid Prototyping and MVPs", image: "/services/rapid-prototyping.png" },
-  { name: "Digital Marketing & SEO", image: "/services/digital-marketing.png" }
-];
+    { name: "Web Development", image: "/services/web-development.png" },
+    { name: "App Development", image: "/services/app-development.png" },
+    { name: "AI Applications", image: "/services/ai-applications.png" },
+    // { name: "Data Driven Products", image: "/services/data-driven-products.png" },
+    // { name: "Blockchain Technology", image: "/services/blockchain-technology.png" },
+    { name: "UI/UX", image: "/services/ui-ux.png" },
+    { name: "Logo Designing", image: "/services/logo-designing.png" },
+    // { name: "Rapid Prototyping and MVPs", image: "/services/rapid-prototyping.png" },
+    { name: "Digital Marketing & SEO", image: "/services/digital-marketing.png" }
+  ];
 
 
   return (
@@ -91,12 +91,12 @@ const ServicesComponentMinimal = () => {
                   group-hover:opacity-100 group-hover:scale-100 group-hover:-translate-y-2
                 "
               >
-              <Image
-  src={service.image}
-  alt={service.name}
-  fill
-  className="object-cover"
-/>
+                <Image
+                  src={service.image}
+                  alt={service.name}
+                  fill
+                  className="object-cover"
+                />
 
               </div>
 

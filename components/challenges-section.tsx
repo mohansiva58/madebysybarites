@@ -59,7 +59,7 @@ export function ChallengesSection() {
   return (
     <section className="relative py-24 bg-[#f8fafc] overflow-hidden border-t border-b border-gray-200/50">
       <div className="mx-auto max-w-[1400px] px-4 md:px-8">
-        
+
         {/* Top Testimonial Card */}
         <div className="flex justify-center mb-16">
           <div
@@ -69,7 +69,7 @@ export function ChallengesSection() {
             )}
           >
             {/* Profile Image */}
-            <div className="flex justify-center mb-4">
+            {/* <div className="flex justify-center mb-4">
               <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 shadow-sm">
                 <Image
                   src="/avatar-1.jpg"
@@ -79,10 +79,10 @@ export function ChallengesSection() {
                   className="object-cover w-full h-full"
                 />
               </div>
-            </div>
-            
+            </div> */}
+
             {/* Quote */}
-            <div className="text-center max-w-[600px]">
+            {/* <div className="text-center max-w-[600px]">
               <p className="text-[15px] text-gray-700 leading-relaxed mb-2">
                 It's not the lines we type,<br />
                 it's the solutions they unlock.
@@ -90,7 +90,7 @@ export function ChallengesSection() {
               <p className="text-xs text-gray-500">
                 – CTO, Vasanta Kumar
               </p>
-            </div>
+            </div> */}
 
             {/* Black Pill Badge */}
             <div className="flex justify-center mt-6">

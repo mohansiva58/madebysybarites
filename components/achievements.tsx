@@ -7,14 +7,14 @@ import { cn } from "@/lib/utils"
 const achievements = [
     {
         id: 1,
-        title: "30+ Brands Served",
+        title: "5+ Brands Served",
         description: "Helping businesses across various industries achieve their goals",
         image: "/achievements/brands.png",
         bgColor: "bg-gradient-to-br from-orange-50 to-purple-50",
     },
     {
         id: 2,
-        title: "8 Years of Experience",
+        title: "1 Years of Experience",
         description: "Bringing seasoned expertise to every project",
         image: "/achievements/experience.png",
         bgColor: "bg-gradient-to-br from-gray-100 to-gray-200",

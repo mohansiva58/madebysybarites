@@ -3,13 +3,13 @@
 import { useEffect, useRef } from "react"
 
 const logos = [
-  { type: "icon", content: "crown" },
-  { type: "text", content: "conquer", style: "italic" },
+  { type: "icon", content: "AtluriEvents" },
+  { type: "text", content: "Rofero", style: "italic" },
   { type: "text", content: "FluentPro", icon: true },
   { type: "text", content: "MACH CONSULTANTS" },
   { type: "text", content: "E TFS", bold: true },
-  { type: "icon", content: "crown" },
-  { type: "text", content: "conquer", style: "italic" },
+  { type: "icon", content: "AtluriEvents" },
+  { type: "text", content: "Rofero", style: "italic" },
   { type: "text", content: "FluentPro", icon: true },
 ]
 

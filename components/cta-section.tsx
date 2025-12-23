@@ -22,10 +22,10 @@ export function CTASection() {
         </div>
 
         {/* Tagline */}
-        <p className="text-muted-foreground text-lg mb-1">It's not the lines we type,</p>
+        {/* <p className="text-muted-foreground text-lg mb-1">It's not the lines we type,</p>
         <p className="text-muted-foreground text-lg">
           it's the impact we create. Building digital solutions that transform businesses globally.
-        </p>
+        </p> */}
 
         {/* Social Links */}
         <div className="flex items-center justify-center gap-5 mt-8">
