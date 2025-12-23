@@ -24,11 +24,11 @@ export function Header() {
         <div className="relative mx-auto max-w-[1400px] px-4 md:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2 relative z-10">
               <img
-                src="/CodeDale_logo.png"
+                src="/works/madebysybariteslogo.png"
                 alt="madebysybarites Logo"
-                className="h-7 w-auto object-contain"
+                className="h-48 sm:h-24 md:h-72 w-auto object-contain transition-all duration-200 hover:scale-105"
               />
             </Link>
 

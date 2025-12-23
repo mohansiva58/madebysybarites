@@ -22,31 +22,26 @@ export function SiteFooter() {
   return (
     <footer className="bg-gray text-black pt-16 pb-8 relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-        <span className="text-[15rem] font-bold text-black/[0.03] tracking-wider blackspace-nowrap">madebysybarites</span>
+        <span className="text-[17rem] font-bold text-black/[0.08] tracking-wider blackspace-nowrap">Sybarites</span>
       </div>
 
       <div className="relative mx-auto max-w-[1200px] px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
           {/* Logo and description */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <svg
-                  className="w-4 h-4 text-black"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4" />
-                </svg>
-              </div>
-              <span className="text-lg font-bold text-black">madebysybarites</span>
+            <Link href="/">
+              <img
+                src="/works/madebysybariteslogo.png"
+                alt="madebysybarites Logo"
+                className="h-20 sm:h-24 md:h-32 w-auto object-contain mb-4 transition-all duration-300 ease-out hover:scale-105 hover:opacity-90"
+              />
             </Link>
-            <p className="text-sm text-black/60 leading-relaxed">
+
+            <p className="text-sm text-black/60 leading-relaxed transition-all duration-300 hover:text-black/80">
               Strategic web design, and campaigns tailored to drive result and conversions.
             </p>
           </div>
+
 
           {/* Company links */}
           <div>

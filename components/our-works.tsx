@@ -59,14 +59,14 @@ export function OurWorks() {
     }, [])
 
     return (
-        <section id="our-works" ref={sectionRef} className="py-20 bg-[#f0f0f0] relative overflow-hidden">
-            <div className="mx-auto max-w-7xl px-40">
-                
+        <section id="our-works" ref={sectionRef} className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#f0f0f0] relative overflow-hidden">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+
                 {/* Header */}
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16">
                     <h2
                         className={cn(
-                            "text-4xl md:text-5xl font-bold text-slate-900 mb-4 transition-all duration-700 ease-out",
+                            "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-3 sm:mb-4 transition-all duration-700 ease-out",
                             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
                         )}
                     >
@@ -74,7 +74,7 @@ export function OurWorks() {
                     </h2>
                     <p
                         className={cn(
-                            "text-slate-600 text-lg transition-all duration-700 ease-out delay-100",
+                            "text-slate-600 text-base sm:text-lg md:text-xl px-2 transition-all duration-700 ease-out delay-100",
                             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
                         )}
                     >
@@ -83,46 +83,58 @@ export function OurWorks() {
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-9 place-items-center" style={{ columnGap: '-40px' }}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
                     {projects.map((project, index) => (
                         <div
                             key={project.id}
                             className={cn(
-                                "group relative rounded-[2.5rem] overflow-hidden transition-all duration-500 ease-out max-w-[430px] w-full mx-auto",
+                                "group relative rounded-2xl sm:rounded-3xl md:rounded-[2.5rem] overflow-hidden transition-all duration-500 ease-out w-full cursor-pointer",
+                                "hover:scale-[1.02] hover:shadow-2xl",
                                 project.bgColor,
                                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
                             )}
-                            style={{ 
+                            style={{
                                 transitionDelay: `${200 + index * 100}ms`,
-                                height: "500px"
                             }}
                             onMouseEnter={() => setHoveredCard(project.id)}
                             onMouseLeave={() => setHoveredCard(null)}
                         >
-                            
-                            {/* Project Image */}
-                            <div className="relative w-full h-full">
+
+                            {/* Project Image - Responsive aspect ratio */}
+                            <div className="relative w-full aspect-[3/4] sm:aspect-[3/4] md:aspect-[4/5]">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     fill
-                                    className="object-cover"
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                />
+
+                                {/* Gradient Overlay - always visible on mobile, hover on desktop */}
+                                <div
+                                    className={cn(
+                                        "absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent transition-opacity duration-300",
+                                        "md:opacity-0 md:group-hover:opacity-100"
+                                    )}
                                 />
                             </div>
 
-                            {/* Bottom Info Bar */}
-                            <div 
+                            {/* Bottom Info Bar - Always visible on mobile, hover on desktop */}
+                            <div
                                 className={cn(
-                                    "absolute bottom-0 left-0 right-0 p-6 flex items-center justify-between transition-all duration-300",
-                                    hoveredCard === project.id 
-                                        ? "translate-y-0 opacity-100" 
-                                        : "translate-y-full opacity-0"
+                                    "absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 lg:p-6",
+                                    "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 md:gap-4",
+                                    "transition-all duration-300",
+                                    // Always visible on mobile, hover effect on desktop
+                                    "translate-y-0 opacity-100",
+                                    "md:translate-y-full md:opacity-0",
+                                    "md:group-hover:translate-y-0 md:group-hover:opacity-100"
                                 )}
                             >
                                 {/* Logo */}
                                 {project.logo ? (
-                                    <div className="bg-white/10 backdrop-blur-md rounded-2xl px-6 py-3 flex items-center gap-3">
-                                        <div className="relative w-12 h-12">
+                                    <div className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-xl md:rounded-2xl px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 flex items-center gap-2 sm:gap-2 md:gap-3">
+                                        <div className="relative w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-12 lg:h-12 flex-shrink-0">
                                             <Image
                                                 src={project.logo}
                                                 alt={`${project.title} logo`}
@@ -130,22 +142,22 @@ export function OurWorks() {
                                                 className="object-contain"
                                             />
                                         </div>
-                                        <span className="text-white font-semibold text-lg">
+                                        <span className="text-white font-semibold text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">
                                             {project.title}
                                         </span>
                                     </div>
                                 ) : (
-                                    <div className="bg-white/10 backdrop-blur-md rounded-2xl px-6 py-3">
-                                        <span className="text-white font-semibold text-lg">
+                                    <div className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-xl md:rounded-2xl px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3">
+                                        <span className="text-white font-semibold text-xs sm:text-sm md:text-base lg:text-lg">
                                             {project.title}
                                         </span>
                                     </div>
                                 )}
 
                                 {/* View Project Button */}
-                                <button className="bg-white hover:bg-gray-100 text-slate-900 font-semibold px-6 py-3 rounded-full flex items-center gap-2 transition-all duration-300 shadow-lg">
+                                <button className="bg-white hover:bg-gray-100 text-slate-900 font-semibold px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 rounded-full flex items-center gap-1.5 sm:gap-2 transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm md:text-base whitespace-nowrap">
                                     View Project
-                                    <ArrowUpRight className="w-5 h-5" />
+                                    <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
                                 </button>
                             </div>
 

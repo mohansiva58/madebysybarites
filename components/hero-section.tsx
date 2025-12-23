@@ -11,12 +11,12 @@ const testimonials = [
   {
     quote: "madebysybarites turned the impossible into possible and redefined our expectations of technology partners.",
     author: "Narasimha Reddy",
-    title: "CEO, TFS",
+    // title: "CEO, TFS",
   },
   {
     quote: "madebysybarites didn't just help us build our vision — they helped us build our future.",
     author: "Sujith Reddy Gopu",
-    title: "CEO, Fluent Pro",
+    // title: "CEO, Fluent Pro",
   },
 ]
 
