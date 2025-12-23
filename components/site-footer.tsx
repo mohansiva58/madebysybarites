@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
@@ -19,6 +20,42 @@ const socialLinks = [
 ]
 
 export function SiteFooter() {
+  const [email, setEmail] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [statusMessage, setStatusMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setStatusMessage(null)
+
+    try {
+      const formData = new FormData()
+      formData.append("access_key", "e44b351d-eeb9-47c7-8256-0f2ecd35880e")
+      formData.append("email", email)
+      formData.append("subject", "New Newsletter Subscription")
+      formData.append("from_name", "madebysybarites Newsletter")
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setStatusMessage({ type: "success", text: "Successfully subscribed to our newsletter!" })
+        setEmail("")
+      } else {
+        setStatusMessage({ type: "error", text: "Something went wrong. Please try again." })
+      }
+    } catch (error) {
+      setStatusMessage({ type: "error", text: "Failed to subscribe. Please try again later." })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <footer className="bg-gray text-black pt-16 pb-8 relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
@@ -81,16 +118,34 @@ export function SiteFooter() {
             <p className="text-sm text-black/60 mb-4">
               Stay ahead with design & marketing tips and strategies that drive results.
             </p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="@ Email"
-                className="flex-1 px-4 py-2.5 bg-black/10 border border-black/20 rounded-lg text-sm text-black placeholder:text-black/40 focus:outline-none focus:border-black/40"
-              />
-              <button className="px-4 py-2.5 bg-blue text-foreground rounded-lg text-sm font-medium hover:bg-red/90 transition-colors">
-                Subscribe
-              </button>
-            </div>
+            <form onSubmit={handleNewsletterSubmit} className="space-y-3">
+              <div className="flex gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="@ Email"
+                  required
+                  disabled={isSubmitting}
+                  className="flex-1 px-4 py-2.5 bg-black/10 border border-black/20 rounded-lg text-sm text-black placeholder:text-black/40 focus:outline-none focus:border-black/40 disabled:opacity-50 disabled:cursor-not-allowed"
+                />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-4 py-2.5 bg-blue text-foreground rounded-lg text-sm font-medium hover:bg-red/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "..." : "Subscribe"}
+                </button>
+              </div>
+              {statusMessage && (
+                <p
+                  className={`text-xs ${statusMessage.type === "success" ? "text-green-600" : "text-red-600"
+                    }`}
+                >
+                  {statusMessage.text}
+                </p>
+              )}
+            </form>
           </div>
         </div>
 
