@@ -10,12 +10,12 @@ import { DotPattern } from "./dot-pattern"
 const testimonials = [
   {
     quote: "madebysybarites turned the impossible into possible and redefined our expectations of technology partners.",
-    author: "Narasimha Reddy",
+    author: "mohan",
     // title: "CEO, TFS",
   },
   {
     quote: "madebysybarites didn't just help us build our vision — they helped us build our future.",
-    author: "Sujith Reddy Gopu",
+    author: "siva",
     // title: "CEO, Fluent Pro",
   },
 ]
