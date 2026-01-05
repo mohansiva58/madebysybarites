@@ -40,18 +40,18 @@ const projects: ProjectCard[] = [
     title: "Founder & CEO of",
     companyHighlight: "TFS",
   },
-  {
-    id: 3,
-    image: "/english-ai-learning-app-with-purple-background-car.jpg",
-    testimonial:
-      "madebysybarites turned our vision into reality. Instant, personalized feedback changed student learning forever.",
-    clientName: "Sujith Reddy Gopu",
-    response: "Honored to drive lasting impact.",
-    avatar: "/professional-indian-man-headshot.jpg",
-    fullName: "Sujith Reddy Gopu",
-    title: "Founder of",
-    companyHighlight: "Fluent Pro",
-  },
+  // {
+  //   id: 3,
+  //   image: "/english-ai-learning-app-with-purple-background-car.jpg",
+  //   testimonial:
+  //     "madebysybarites turned our vision into reality. Instant, personalized feedback changed student learning forever.",
+  //   clientName: "Sujith Reddy Gopu",
+  //   response: "Honored to drive lasting impact.",
+  //   avatar: "/professional-indian-man-headshot.jpg",
+  //   fullName: "Sujith Reddy Gopu",
+  //   title: "Founder of",
+  //   companyHighlight: "Fluent Pro",
+  // },
   {
     id: 4,
     image: "/project-management-dashboard-multiple-ui-screens-m.jpg",

@@ -3,7 +3,6 @@ import { HeroSection } from "@/components/hero-section"
 import { ProjectShowcase } from "@/components/project-showcase"
 import { LogoCarousel } from "@/components/logo-carousel"
 import { ChallengesSection } from "@/components/challenges-section"
-import { CTASection } from "@/components/cta-section"
 import { SiteFooter } from "@/components/site-footer"
 import { FloatingNav } from "@/components/floating-nav"
 import { WhyChooseUs } from "@/components/why-choose-us"
@@ -35,7 +34,6 @@ export default function Home() {
       <OurWorks />
       <Achievements />
       <FAQSection />
-      <CTASection />
       <SiteFooter />
     </main>
   )

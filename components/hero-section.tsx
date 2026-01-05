@@ -5,24 +5,26 @@ import { ArrowRight, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { DotPattern } from "./dot-pattern"
 
 const testimonials = [
   {
     quote: "madebysybarites turned the impossible into possible and redefined our expectations of technology partners.",
     author: "mohan",
-    // title: "CEO, TFS",
+    title: "CEO, TFS",
   },
   {
     quote: "madebysybarites didn't just help us build our vision — they helped us build our future.",
     author: "siva",
-    // title: "CEO, Fluent Pro",
+    title: "CEO, Fluent Pro",
   },
 ]
 
 const avatars = ["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.jpg"]
 
 export function HeroSection() {
+  const router = useRouter()
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
@@ -135,7 +137,7 @@ export function HeroSection() {
               style={{ transitionDelay: "100ms" }}
             >
               <span className="inline-flex items-center gap-4 flex-wrap justify-center">
-                World-class Tech Partner
+                Building the Future of
                 <Image
                   src="/hero-icons/figma.png"
                   alt="Figma Logo"
@@ -143,33 +145,30 @@ export function HeroSection() {
                   height={80}     // increase actual image height
                   className="w-10 h-10 md:w-14 md:h-14 inline-block object-contain"
                 />
-
-
               </span>
               <br />
               <span className="inline-flex items-center gap-3 flex-wrap justify-center">
-                Engineering Your Digital
+                Digital Products From
                 <Image
                   src="/hero-icons/supabase.png"
-                  alt="Figma Logo"
+                  alt="Supabase Logo"
                   width={36}     // matches w-9
                   height={36}    // matches h-9
                   className="w-7 h-7 md:w-9 md:h-9 inline-block object-contain"
                 />
-
-                Success
+                Zero to One
               </span>
             </h1>
 
             {/* Subheading */}
             <p
               className={cn(
-                "mt-6 text-base md:text-lg text-muted-foreground max-w-[540px] leading-relaxed transition-all duration-700 ease-out",
+                "mt-6 text-base md:text-lg text-muted-foreground max-w-[600px] leading-relaxed transition-all duration-700 ease-out",
                 isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
               )}
               style={{ transitionDelay: "200ms" }}
             >
-              Trusted by startups and enterprises to design, build, and scale products that perform globally.
+              We help visionary founders turn complex ideas into <span className="text-foreground font-medium">minimal, high-performance products</span>. Built for speed, designed for impact, and engineered to scale.
             </p>
 
             {/* CTA Button */}
@@ -180,15 +179,12 @@ export function HeroSection() {
               )}
               style={{ transitionDelay: "300ms" }}
             >
+
               <Button
+                onClick={() => router.push("/contact")}
                 size="lg"
                 className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-3 pl-5 pr-7 py-7 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200"
               >
-                {/* <div className="w-9 h-9 rounded-full bg-primary flex items-center justify-center">
-                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </div> */}
                 Connect us
               </Button>
             </div>

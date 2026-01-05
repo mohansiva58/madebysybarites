@@ -8,31 +8,35 @@ import { ArrowUpRight } from "lucide-react"
 const projects = [
     {
         id: 1,
-        title: "TFS Finserv",
+        title: "ROFERO",
         image: "/works/project1.png",
         bgColor: "bg-gradient-to-br from-slate-800 to-slate-950",
         logo: "/works/logo1.png",
+        href: "https://clothingbrand-nu.vercel.app/",
     },
     {
         id: 2,
-        title: "Apple Store Clone",
+        title: "Atlutievents",
         image: "/works/project2.png",
         bgColor: "bg-gradient-to-br from-blue-400 to-blue-600",
         logo: "/works/logo2.png",
+        href: "https://atlurievents.in/",
     },
     {
         id: 3,
-        title: "E-Commerce Platform",
+        title: "Akepatimart",
         image: "/works/project3.png",
         bgColor: "bg-gradient-to-br from-purple-500 to-purple-700",
         logo: "/works/logo3.png",
+        href: "https://akepatimart.com/",
     },
     {
         id: 4,
-        title: "Dashboard Analytics",
+        title: "Wonderkids",
         image: "/works/project4.png",
         bgColor: "bg-gradient-to-br from-emerald-400 to-emerald-600",
         logo: "/works/logo4.png",
+        href: "https://wonderkids.great-site.net/?i=1",
     },
 ]
 
@@ -155,10 +159,15 @@ export function OurWorks() {
                                 )}
 
                                 {/* View Project Button */}
-                                <button className="bg-white hover:bg-gray-100 text-slate-900 font-semibold px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 rounded-full flex items-center gap-1.5 sm:gap-2 transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm md:text-base whitespace-nowrap">
+                                <a
+                                    href={project.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white hover:bg-gray-100 text-slate-900 font-semibold px-3 sm:px-4 md:px-5 lg:px-6 py-2 sm:py-2.5 md:py-3 rounded-full flex items-center gap-1.5 sm:gap-2 transition-all duration-300 shadow-lg hover:shadow-xl text-xs sm:text-sm md:text-base whitespace-nowrap"
+                                >
                                     View Project
                                     <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
-                                </button>
+                                </a>
                             </div>
 
                         </div>
