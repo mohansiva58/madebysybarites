@@ -24,7 +24,7 @@ const ServicesComponentMinimal = () => {
     // { name: "Data Driven Products", image: "/services/data-driven-products.png" },
     // { name: "Blockchain Technology", image: "/services/blockchain-technology.png" },
     { name: "UI/UX", image: "/services/ui-ux.png" },
-    { name: "Logo Designing", image: "/services/logo-designing.png" },
+    { name: "Logo Designing", image: "/works/image.png" },
     // { name: "Rapid Prototyping and MVPs", image: "/services/rapid-prototyping.png" },
     { name: "Digital Marketing & SEO", image: "/services/digital-marketing.png" }
   ];

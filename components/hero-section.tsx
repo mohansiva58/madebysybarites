@@ -11,13 +11,13 @@ import { DotPattern } from "./dot-pattern"
 const testimonials = [
   {
     quote: "madebysybarites turned the impossible into possible and redefined our expectations of technology partners.",
-    author: "mohan",
-    title: "CEO, TFS",
+    // author: "mohan",
+    // title: "CEO, TFS",
   },
   {
     quote: "madebysybarites didn't just help us build our vision — they helped us build our future.",
-    author: "siva",
-    title: "CEO, Fluent Pro",
+    // author: "siva",
+    // title: "CEO, Fluent Pro",
   },
 ]
 
