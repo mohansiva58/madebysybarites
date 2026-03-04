@@ -11,7 +11,7 @@ const navItems = [
   { label: "Our Work", href: "/#our-works" },
   { label: "Achievements", href: "/#achievements" },
   { label: "FAQs", href: "/#faqs" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact", href: "https://wa.me/919701630276" },
 ]
 
 export function FloatingNav() {
@@ -61,12 +61,14 @@ export function FloatingNav() {
         </nav>
 
         {/* CTA Button */}
-        <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2 px-4 py-2 text-sm font-medium">
-          Contact Us
-          <span className="flex items-center justify-center w-4 h-7 rounded-full bg-background/20">
-            <ArrowUpRight className="w-3 h-5" />
-          </span>
-        </Button>
+        <Link href="https://wa.me/919701630276" target="_blank" rel="noopener noreferrer">
+          <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2 px-4 py-2 text-sm font-medium">
+            Contact Us
+            <span className="flex items-center justify-center w-4 h-7 rounded-full bg-background/20">
+              <ArrowUpRight className="w-3 h-5" />
+            </span>
+          </Button>
+        </Link>
       </div>
     </div>
   )

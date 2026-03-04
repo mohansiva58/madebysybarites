@@ -12,7 +12,7 @@ const navItems = [
   { label: "Our Work", href: "/#our-works" },
   { label: "Achievements", href: "/#achievements" },
   { label: "FAQs", href: "/#faqs" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact", href: "https://wa.me/919701630276" },
 ]
 
 export function Header() {
@@ -50,12 +50,14 @@ export function Header() {
 
             {/* CTA Button - Desktop */}
             <div className="hidden md:block">
-              <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2 px-5 py-2.5 text-sm font-medium">
-                Contact Us
-                <div className="w-5 h-5 rounded-full bg-muted-foreground/30 flex items-center justify-center">
-                  <ArrowUpRight className="w-3 h-3" />
-                </div>
-              </Button>
+              <Link href="https://wa.me/919701630276" target="_blank" rel="noopener noreferrer">
+                <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2 px-5 py-2.5 text-sm font-medium">
+                  Contact Us
+                  <div className="w-5 h-5 rounded-full bg-muted-foreground/30 flex items-center justify-center">
+                    <ArrowUpRight className="w-3 h-3" />
+                  </div>
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -81,17 +83,21 @@ export function Header() {
           {navItems.map((item) => (
             <Link
               key={item.label}
-              href={item.href}
+              href={item.label === "Contact" ? item.href : item.href}
+              target={item.label === "Contact" ? "_blank" : undefined}
+              rel={item.label === "Contact" ? "noopener noreferrer" : undefined}
               className="text-2xl font-medium text-foreground hover:text-primary transition-colors"
               onClick={() => setIsOpen(false)}
             >
               {item.label}
             </Link>
           ))}
-          <Button className="mt-4 rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2 px-6 py-3 text-base">
-            Contact Us
-            <ArrowUpRight className="w-4 h-4" />
-          </Button>
+          <Link href="https://wa.me/919701630276" target="_blank" rel="noopener noreferrer" className="mt-4">
+            <Button className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-2 px-6 py-3 text-base">
+              Contact Us
+              <ArrowUpRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </nav>
       </div>
     </>

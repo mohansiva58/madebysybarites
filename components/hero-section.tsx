@@ -181,7 +181,7 @@ export function HeroSection() {
             >
 
               <Button
-                onClick={() => router.push("/contact")}
+                onClick={() => window.open("https://wa.me/919701630276", "_blank")}
                 size="lg"
                 className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-3 pl-5 pr-7 py-7 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200"
               >

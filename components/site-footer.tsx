@@ -5,12 +5,12 @@ import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
 
 const companyLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Our Work", href: "#work" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "FAQs", href: "#faqs" },
-  { label: "Brand", href: "#brand" },
-  { label: "Contact", href: "/contact" },
+  { label: "Services", href: "/#services" },
+  { label: "Our Work", href: "/#our-works" },
+  { label: "Achievements", href: "/#achievements" },
+  { label: "FAQs", href: "/#faqs" },
+  { label: "Brand", href: "/#brand" },
+  { label: "Contact", href: "https://wa.me/919701630276" },
 ]
 
 const socialLinks = [
