@@ -11,6 +11,8 @@ const logos = [
   { type: "icon", content: "AtluriEvents" },
   { type: "text", content: "Rofero", style: "italic" },
   { type: "text", content: "Brandverse", icon: true },
+  { type: "text", content: "Shewear", icon: true },
+
 ]
 
 export function LogoCarousel() {

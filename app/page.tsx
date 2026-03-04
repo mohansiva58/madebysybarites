@@ -1,6 +1,6 @@
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { ProjectShowcase } from "@/components/project-showcase"
+// import { ProjectShowcase } from "@/components/project-showcase"
 import { LogoCarousel } from "@/components/logo-carousel"
 import { ChallengesSection } from "@/components/challenges-section"
 import { SiteFooter } from "@/components/site-footer"
@@ -25,7 +25,7 @@ export default function Home() {
       >
         <HeroSection />
       </div>
-      <ProjectShowcase />
+      {/* <ProjectShowcase /> */}
       <LogoCarousel />
       <ChallengesSection />
       <WhyChooseUs />
