@@ -1,236 +1,303 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useRef, useEffect } from "react"
+import { motion } from "framer-motion"
 import { ArrowRight, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { DotPattern } from "./dot-pattern"
 
-const testimonials = [
-  {
-    quote: "madebysybarites turned the impossible into possible and redefined our expectations of technology partners.",
-    // author: "mohan",
-    // title: "CEO, TFS",
-  },
-  {
-    quote: "madebysybarites didn't just help us build our vision — they helped us build our future.",
-    // author: "siva",
-    // title: "CEO, Fluent Pro",
-  },
+// --- CSS ONLY MOCKUPS ---
+
+const WebMockup = () => (
+  <div className="w-full h-full bg-[#f8f9fa] rounded-2xl border border-gray-200 shadow-[0_10px_40px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col pointer-events-none">
+    <div className="flex gap-1.5 p-3 border-b border-gray-200 bg-white">
+      <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></div>
+      <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></div>
+      <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></div>
+    </div>
+    <div className="p-3 flex flex-col gap-3 h-full">
+      <div className="flex-1 bg-[#edf2f7] rounded-xl w-full relative overflow-hidden flex items-center justify-center min-h-[100px]">
+        <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-blue-200/50 rounded-full blur-2xl"></div>
+        <div className="w-16 h-16 rounded-full bg-blue-100 shadow-sm border border-blue-50"></div>
+      </div>
+      <div className="h-4 bg-gray-200 rounded-full w-2/3 shrink-0"></div>
+      <div className="flex gap-2 shrink-0">
+        <div className="h-10 lg:h-12 w-1/2 bg-white rounded-lg shadow-sm"></div>
+        <div className="h-10 lg:h-12 w-1/2 bg-white rounded-lg shadow-sm"></div>
+      </div>
+    </div>
+  </div>
+)
+
+const AppMockup = () => (
+  <div className="w-[85%] mx-auto h-full bg-gray-900 rounded-[2.5rem] border-[6px] border-[#111] shadow-[0_10px_40px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col relative pointer-events-none pb-2">
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-[#111] rounded-b-xl z-20"></div>
+    <div className="p-3 lg:p-4 pt-8 lg:pt-10 flex flex-col gap-3 lg:gap-4 flex-1">
+      <div className="flex justify-between items-center shrink-0">
+        <div className="w-8 h-8 rounded-full bg-indigo-500"></div>
+        <div className="w-12 h-3 bg-gray-700 rounded-full"></div>
+      </div>
+      <div className="flex-1 min-h-[100px] bg-gradient-to-tr from-indigo-500 to-fuchsia-500 rounded-xl relative overflow-hidden shadow-inner">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+      </div>
+      <div className="flex gap-2 shrink-0">
+        <div className="h-12 flex-1 bg-gray-800 rounded-xl"></div>
+        <div className="h-12 flex-1 bg-gray-800 rounded-xl"></div>
+      </div>
+    </div>
+    <div className="h-2 w-1/3 bg-gray-800 rounded-full mx-auto shrink-0 mb-1"></div>
+  </div>
+)
+
+const SaaSMockup = () => (
+  <div className="w-[95%] mx-auto bg-white rounded-2xl border border-gray-200 shadow-[0_10px_40px_rgba(0,0,0,0.1)] overflow-hidden flex h-full pointer-events-none">
+    <div className="w-[30%] bg-gray-50 flex flex-col gap-2 p-2 border-r border-gray-100">
+      <div className="w-full h-5 bg-indigo-100 rounded mb-2"></div>
+      <div className="w-full h-2 bg-gray-200 rounded"></div>
+      <div className="w-4/5 h-2 bg-gray-200 rounded"></div>
+      <div className="w-full h-2 bg-gray-200 rounded"></div>
+    </div>
+    <div className="flex-1 p-2 lg:p-3 flex flex-col gap-2 lg:gap-3">
+      <div className="flex justify-between shrink-0">
+        <div className="w-16 h-3 bg-gray-100 rounded"></div>
+        <div className="w-6 h-6 rounded-full bg-gray-100"></div>
+      </div>
+      <div className="flex gap-2 shrink-0">
+        <div className="flex-1 h-10 lg:h-12 bg-indigo-50 rounded-lg p-2 border border-indigo-100"></div>
+        <div className="flex-1 h-10 lg:h-12 bg-gray-50 rounded-lg p-2 border border-gray-100"></div>
+      </div>
+      <div className="flex-1 bg-white border border-gray-100 rounded-lg flex items-end p-2 gap-1 overflow-hidden relative min-h-[80px]">
+        <div className="w-1/4 bg-teal-200 rounded-t h-[40%]"></div>
+        <div className="w-1/4 bg-teal-300 rounded-t h-[60%]"></div>
+        <div className="w-1/4 bg-teal-400 rounded-t h-[50%]"></div>
+        <div className="w-1/4 bg-teal-500 rounded-t h-[80%]"></div>
+      </div>
+    </div>
+  </div>
+)
+
+const BrandingMockup = () => (
+  <div className="w-[90%] mx-auto bg-zinc-900 rounded-2xl border border-zinc-800 shadow-[0_10px_40px_rgba(0,0,0,0.2)] overflow-hidden flex flex-col items-center justify-center h-full p-4 lg:p-6 relative pointer-events-none">
+    <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/20 rounded-full blur-3xl"></div>
+
+    <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-gradient-to-tr from-rose-400 to-indigo-500 shadow-lg flex items-center justify-center p-1 z-10">
+      <div className="w-full h-full rounded-full border-2 border-white flex items-center justify-center relative">
+        <div className="absolute inset-0 bg-white mix-blend-overlay rounded-full opacity-50"></div>
+        <div className="w-6 h-6 lg:w-8 lg:h-8 bg-white rounded-full"></div>
+      </div>
+    </div>
+
+    <div className="flex gap-2 mt-6 lg:mt-8 z-10">
+      <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-rose-400 shadow-md"></div>
+      <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-indigo-500 shadow-md"></div>
+      <div className="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-emerald-400 shadow-md"></div>
+    </div>
+
+    <div className="mt-4 lg:mt-6 flex flex-col items-center gap-2 z-10">
+      <div className="text-white/90 font-serif italic text-2xl lg:text-3xl">Aa</div>
+      <div className="w-8 h-1 bg-white/20 rounded-full mt-1"></div>
+    </div>
+  </div>
+)
+
+const ArchCard = ({ height, width, radius, label, isImage, children, className, delay = 0 }: { height: string, width: string, radius: string, label: string, isImage?: boolean, children: React.ReactNode, className?: string, delay?: number }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.9, y: 50 }}
+    animate={{ opacity: 1, scale: 1, y: 0 }}
+    transition={{ duration: 0.8, delay, ease: "easeOut" }}
+    className={`relative flex justify-center items-end shrink-0 ${className}`}
+    style={{
+      width: width,
+      height: height,
+      borderRadius: `${radius} ${radius} 0 0`,
+      overflow: "hidden",
+      background: "#ffffff",
+      boxShadow: "0 20px 60px rgba(0, 0, 0, 0.12)",
+      border: "3px solid #d8dafb",
+    }}
+  >
+    {/* Container for the mockup */}
+    <div className={`absolute ${isImage ? 'inset-0 w-full h-full' : 'top-10 left-[5%] w-[90%] h-[90%] drop-shadow-2xl'} transition-transform duration-500 hover:scale-[1.04] origin-bottom cursor-pointer`}>
+      {children}
+    </div>
+    {!isImage && <span className="text-gray-400 text-[11px] font-bold uppercase tracking-[0.15em] z-10 mb-8">{label}</span>}
+  </motion.div>
+)
+
+const CARDS_DATA = [
+  { id: 1, img: "/works/project3.png", label: "Web", h: "40vh", w: "150px", r: "75px" },
+  { id: 2, img: "/works/project1.png", label: "Apps", h: "45vh", w: "155px", r: "77.5px" },
+  { id: 3, img: "/works/project2.png", label: "SaaS", h: "50vh", w: "160px", r: "80px" },
+  { id: 4, img: "/works/project4.png", label: "Brand", h: "55vh", w: "165px", r: "82.5px" },
+  { id: 5, img: "/works/project5.png", label: "Design", h: "60vh", w: "170px", r: "85px" },
+  { id: 6, img: "/works/project6.png", label: "Mobile", h: "65vh", w: "175px", r: "87.5px" },
+  { id: 7, img: "/works/project7.png", label: "Product", h: "70vh", w: "180px", r: "90px" },
+  { id: 8, img: "/works/project8.png", label: "UI/UX", h: "75vh", w: "185px", r: "92.5px" },
+  { id: 9, img: "/works/project9.png", label: "Creative", h: "80vh", w: "190px", r: "95px" },
 ]
 
-const avatars = ["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.jpg"]
-
 export function HeroSection() {
-  const router = useRouter()
-  const [isLoaded, setIsLoaded] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsLoaded(true)
-  }, [])
+    const container = scrollRef.current;
+    if (!container) return;
+
+    let animationFrameId: number;
+    let isInterrupted = false;
+
+    const totalScroll = container.scrollWidth - container.clientWidth;
+
+    // Phase 1: Instant start at the beginning (Small cards)
+    container.scrollLeft = 0;
+
+    // Phase 2: Intro preview (Slide to Large cards)
+    // This gives a quick glimpse of the mountain peak
+    const introTimer = setTimeout(() => {
+      container.scrollTo({ left: totalScroll, behavior: "smooth" });
+    }, 1000);
+
+    // Phase 3: Slow cinematic one-way glide back to the start (Small cards)
+    // This keeps the layout "moving" and alive
+    const glideTimer = setTimeout(() => {
+      if (isInterrupted) return;
+
+      const duration = 25000; // 25 seconds for a premium, slow glide
+      let startTime: number | null = null;
+
+      const animateGlide = (currentTime: number) => {
+        if (isInterrupted) return;
+        if (!startTime) startTime = currentTime;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Reverse direction: Glide from Max towards 0
+        container.scrollLeft = totalScroll * (1 - progress);
+
+        if (progress < 1) {
+          animationFrameId = requestAnimationFrame(animateGlide);
+        }
+      };
+
+      animationFrameId = requestAnimationFrame(animateGlide);
+    }, 4500);
+
+    // Stop automation if user interacts
+    const handleInteraction = () => {
+      isInterrupted = true;
+      cancelAnimationFrame(animationFrameId);
+    };
+
+    container.addEventListener('mousedown', handleInteraction);
+    container.addEventListener('wheel', handleInteraction);
+    container.addEventListener('touchstart', handleInteraction);
+
+    return () => {
+      clearTimeout(introTimer);
+      clearTimeout(glideTimer);
+      cancelAnimationFrame(animationFrameId);
+      container.removeEventListener('mousedown', handleInteraction);
+      container.removeEventListener('wheel', handleInteraction);
+      container.removeEventListener('touchstart', handleInteraction);
+    };
+  }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#f8fafc]">
-      <div className="relative mx-auto max-w-[1400px] px-4 md:px-8 pt-12 md:pt-20 pb-24">
+    <section className="relative w-full h-[85vh] min-h-[700px] xl:min-h-[750px] overflow-hidden bg-white selection:bg-[#E6E5FF] selection:text-black">
 
-        {/* Dots Background */}
-        <div
-          className="absolute inset-x-0 top-0"
-          style={{ height: "calc(100% - 420px)", paddingLeft: "90px", paddingRight: "90px" }}
-        >
-          <div className="relative w-full h-full">
-            <DotPattern width={15} height={15} cx={1} cy={1} cr={1} className="text-neutral-400/30" />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to right, rgba(248, 250, 252, 1) 0%, rgba(248, 250, 252, 0) 15%, rgba(248, 250, 252, 0) 85%, rgba(248, 250, 252, 1) 100%), linear-gradient(to top, rgba(248, 250, 252, 1) 0%, rgba(248, 250, 252, 0) 30%)",
-                pointerEvents: "none",
-              }}
-            />
-          </div>
-        </div>
+      {/* Background shape mimicking the reference slant */}
+      <div
+        className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none"
+        style={{
+          background: "linear-gradient(135deg, #e4e2f6 0%, #d8dafb 100%)",
+          clipPath: "polygon(0 0, 75% 0, 42% 100%, 0 100%)"
+        }}
+      />
+      <div className="relative z-20 w-full h-full flex flex-col lg:flex-row items-center justify-between px-6 lg:px-12 pt-28 pb-0">
 
-        {/* ======================= SIDE FLOATING TESTIMONIAL — LEFT ======================= */}
-        <div
-          className={cn(
-            "hidden xl:block absolute left-4 top-[258px] transition-all duration-700 ease-out z-10",
-            isLoaded ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8",
-          )}
-          style={{ transitionDelay: "400ms" }}
-        >
-          {/* BACK LAYER TO MATCH IMAGE */}
-          <div className="absolute top-2 left-2 w-full h-full bg-white-900 rounded-[32px] shadow-md" style={{ transform: "rotate(-10deg)" }}></div>
-
-          {/* FRONT CARD */}
-          <div
-            className="relative bg-white rounded-[32px] shadow-xl px-6 py-4 max-w-[300px] border border-gray-200"
-            style={{ transform: "rotate(-15deg)" }}
+        {/* Left Content */}
+        <div className="w-full lg:w-[40%] flex flex-col h-full pt-10 lg:pt-[15vh] relative z-30">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-[3rem] md:text-[4rem] lg:text-[4.5rem] xl:text-[5.5rem] text-[#111] leading-[1.05] tracking-[-0.02em] uppercase max-w-[800px] font-semibold"
+            style={{ fontFamily: "'DxRuiga-SemiBold', sans-serif" }}
           >
-            <span className="absolute top-4 right-6 text-4xl text-gray-300 font-serif leading-none">"</span>
+            HIGH PERFORMANCE.<br />ELEVATED<br />EXPERIENCES.
+          </motion.h1>
 
-            <p className="text-[15px] text-gray-700 leading-[1.6]">
-              "{testimonials[0].quote}"
-            </p>
-
-            <p className="mt-5 text-[15px] text-gray-900 font-semibold">
-              – {testimonials[0].author}, {testimonials[0].title}
-            </p>
-          </div>
-        </div>
-
-        {/* ======================= SIDE FLOATING TESTIMONIAL — RIGHT ======================= */}
-        <div
-          className={cn(
-            "hidden xl:block absolute right-4 top-[258px] transition-all duration-700 ease-out z-10",
-            isLoaded ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8",
-          )}
-          style={{ transitionDelay: "500ms" }}
-        >
-          {/* BACK LAYER */}
-          <div className="absolute top-2 left-2 w-full h-full bg-gray-200 rounded-[32px] shadow-md" style={{ transform: "rotate(20deg)" }}></div>
-
-          {/* FRONT CARD */}
-          <div
-            className="relative bg-white rounded-[32px] shadow-xl px-6 py-4 max-w-[280px] border border-gray-200"
-            style={{ transform: "rotate(15deg)" }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-6 md:mt-10 flex items-start gap-4 md:gap-6"
           >
-            <span className="absolute top-4 right-6 text-4xl text-gray-300 font-serif leading-none">"</span>
+            {/* 4 Point Star Icon */}
 
-            <p className="text-[15px] text-gray-700 leading-[1.6]">
-              "{testimonials[1].quote}"
+            <p className="text-[#333] text-[15px] md:text-[17px] font-medium leading-[1.6] max-w-sm tracking-[0.02em]">
+              Fluid code. Iconic designs.<br />
+              Effortless scale. Built from<br />
+              zero to one.
             </p>
+          </motion.div>
 
-            <p className="mt-5 text-[15px] text-gray-900 font-semibold">
-              – {testimonials[1].author}, {testimonials[1].title}
-            </p>
-          </div>
-        </div>
-
-        {/* ======================= MAIN HERO CONTENT ======================= */}
-        <div className="relative">
-          <div className="flex flex-col items-center text-center max-w-[750px] mx-auto">
-
-            {/* Availability Badge */}
-            <div
-              className={cn(
-                "inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-border bg-white shadow-sm mb-10 transition-all duration-500 ease-out",
-                isLoaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4",
-              )}
-            >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
-              <span className="text-sm text-foreground font-medium">Made by Sybarites</span>
-              <ArrowRight className="w-4 h-4 text-muted-foreground" />
-            </div>
-
-            {/* Headline */}
-            <h1
-              className={cn(
-                "text-[2.5rem] md:text-[2.25rem] lg:text-[2.75rem] font-bold text-foreground leading-[1.15] tracking-tight transition-all duration-700 ease-out",
-                isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-              )}
-              style={{ transitionDelay: "100ms" }}
-            >
-              <span className="inline-flex items-center gap-4 flex-wrap justify-center">
-                Building the Future of
-                <Image
-                  src="/hero-icons/figma.png"
-                  alt="Figma Logo"
-                  width={80}      // increase actual image width
-                  height={80}     // increase actual image height
-                  className="w-10 h-10 md:w-14 md:h-14 inline-block object-contain"
-                />
-              </span>
-              <br />
-              <span className="inline-flex items-center gap-3 flex-wrap justify-center">
-                Digital Products From
-                <Image
-                  src="/hero-icons/supabase.png"
-                  alt="Supabase Logo"
-                  width={36}     // matches w-9
-                  height={36}    // matches h-9
-                  className="w-7 h-7 md:w-9 md:h-9 inline-block object-contain"
-                />
-                Zero to One
-              </span>
-            </h1>
-
-            {/* Subheading */}
-            <p
-              className={cn(
-                "mt-6 text-base md:text-lg text-muted-foreground max-w-[600px] leading-relaxed transition-all duration-700 ease-out",
-                isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-              )}
-              style={{ transitionDelay: "200ms" }}
-            >
-              We help visionary founders turn complex ideas into <span className="text-foreground font-medium">minimal, high-performance products</span>. Built for speed, designed for impact, and engineered to scale.
-            </p>
-
-            {/* CTA Button */}
-            <div
-              className={cn(
-                "mt-8 transition-all duration-700 ease-out",
-                isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-              )}
-              style={{ transitionDelay: "300ms" }}
-            >
-
-              <Button
-                onClick={() => window.open("https://wa.me/919701630276", "_blank")}
-                size="lg"
-                className="rounded-full bg-foreground text-background hover:bg-foreground/90 gap-3 pl-5 pr-7 py-7 text-base font-medium shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                Connect us
-              </Button>
-            </div>
-
-            {/* Social Proof */}
-            <div
-              className={cn(
-                "mt-8 flex flex-col items-center gap-3 transition-all duration-700 ease-out",
-                isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-              )}
-              style={{ transitionDelay: "400ms" }}
-            >
-              <div className="flex items-center gap-5">
-                <div className="flex -space-x-3">
-                  {avatars.map((avatar, i) => (
-                    <div
-                      key={i}
-                      className="w-11 h-11 rounded-full border-[3px] border-white overflow-hidden bg-muted shadow-sm"
-                    >
-                      <Image
-                        src={avatar}
-                        alt={`Client ${i + 1}`}
-                        width={44}
-                        height={44}
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                  ))}
-                  <div className="w-11 h-11 rounded-full border-[3px] border-white bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground shadow-sm">
-                    +30
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].length > 0 &&
-                    [...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-foreground text-foreground" />
-                    ))}
-                </div>
+          {/* Client Review Box matching exact Ivory Mode UI */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mt-12 md:mt-16 bg-[#aeb2d8] rounded-[32px] p-6 lg:p-7 w-[90%] max-w-[340px] shadow-lg relative border border-[#c4c7e6] backdrop-blur-md"
+          >
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="text-[2.5rem] md:text-[3rem] text-white font-light leading-none tracking-tight -ml-1">400<span className="text-[2rem] font-normal align-top">+</span></h3>
+                <p className="text-white/90 text-[13px] tracking-wide mt-2">Projects Delivered</p>
               </div>
-              <span className="text-sm text-muted-foreground ml-[50px] self-start">
-                From 30+ reviews
-              </span>
+              <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm">
+                <ArrowRight className="w-5 h-5 text-gray-800" strokeWidth={2.5} />
+              </button>
             </div>
+
+            <div className="flex items-center gap-6 mt-8">
+              <div className="flex -space-x-3">
+                {["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.jpg", "/placeholder.jpg"].map((src, i) => (
+                  <img key={i} src={src} className="w-10 h-10 md:w-11 md:h-11 rounded-full border-2 border-[#aeb2d8] object-cover bg-gray-200" alt="avatar" />
+                ))}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Star className="w-4 h-4 md:w-5 md:h-5 fill-white text-white" />
+                <span className="text-white font-medium text-[14px] md:text-[16px]">5 Stars</span>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* Full-Width Cards Section with Cinematic One-Way Motion */}
+        <div className="absolute inset-0 w-full h-full z-10 overflow-hidden pointer-events-none">
+          {/* Gradient mask to protect text on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent z-20 w-[60%] hidden lg:block" />
+
+          <div
+            ref={scrollRef}
+            className="absolute bottom-0 right-0 w-full h-[85vh] overflow-x-auto scrollbar-hide flex items-end gap-[48px] px-12 lg:pl-[45vw] lg:pr-24 pb-0 z-10 select-none pointer-events-auto"
+          >
+            {CARDS_DATA.map((card, idx) => (
+              <ArchCard
+                key={card.id}
+                height={card.h}
+                width={card.w}
+                radius={card.r}
+                label={card.label}
+                isImage
+                delay={0.8 + idx * 0.1}
+              >
+                <img src={card.img} alt={card.label} className="w-full h-full object-cover" />
+              </ArchCard>
+            ))}
           </div>
         </div>
+
+
       </div>
     </section>
   )
