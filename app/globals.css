@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: 'DxRuiga-SemiBold';
+  src: url('/fonts/DxRuiga-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -149,6 +156,15 @@
 
   .shadow-floating {
     box-shadow: var(--shadow-floating);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 

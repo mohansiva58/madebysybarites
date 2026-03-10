@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "madebysybarites | World-class Tech Partner",
+  title: "Sybarites | World-class Tech Partner",
   description:
     "Trusted by startups and enterprises to design, build, and scale products that perform globally. Engineering your digital success.",
   keywords: ["web development", "mobile apps", "UI/UX design", "AI solutions", "tech partner", "software development"],
