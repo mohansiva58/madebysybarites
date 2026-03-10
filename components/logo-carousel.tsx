@@ -12,7 +12,6 @@ const logos = [
   { type: "text", content: "Rofero", style: "italic" },
   { type: "text", content: "Brandverse", icon: true },
   { type: "text", content: "Shewear", icon: true },
-
 ]
 
 export function LogoCarousel() {
@@ -39,7 +38,7 @@ export function LogoCarousel() {
   }, [])
 
   return (
-    <section className="py-8 border-y border-border/30 bg-background overflow-hidden">
+    <section className="py-8 border-y border-border/30 bg-[#fcfcfc] overflow-hidden">
       <div
         ref={scrollRef}
         className="flex items-center gap-16 overflow-hidden whitespace-nowrap px-8"
@@ -54,6 +53,9 @@ export function LogoCarousel() {
               <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z" />
               </svg>
+            )}
+            {logo.type === "icon" && logo.content !== "crown" && (
+              <span className="font-semibold">{logo.content}</span>
             )}
             {logo.type === "text" && (
               <span className={`${logo.style === "italic" ? "italic" : ""} ${logo.bold ? "font-bold" : ""}`}>
@@ -71,3 +73,6 @@ export function LogoCarousel() {
     </section>
   )
 }
+
+export const Case1 = LogoCarousel;
+export const AnimatedCarousel = LogoCarousel;

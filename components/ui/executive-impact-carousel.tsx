@@ -3,33 +3,25 @@
 import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export interface ServiceItem {
-    name: string;
-    image: string;
+export interface Product {
+    id: string;
+    title: string;
+    price: string;
+    oldPrice?: string;
+    prodImg: string;
     modelImg: string;
 }
 
-interface ServicesCarouselProps {
-    services: ServiceItem[];
-}
-
 const styles = `
-  .services-carousel {
-    background-color: #f6f7fb;
-    color: #1f1f1f;
+  .products-carousel {
+    background-color: transparent;
+    color: #111;
+    font-family: inherit;
     margin: 0;
     overflow-x: hidden;
-    position: relative;
-    padding-top: 5rem;
-  }
-  
-  .dark .services-carousel {
-    background-color: #0a0a0a;
-    color: #f4f1ea;
   }
 
   .col-scroll {
@@ -37,11 +29,10 @@ const styles = `
     grid-template-columns: repeat(3, 1fr);
     justify-items: center;
     min-height: 100vh;
-    width: 100%;
-    max-width: 1400px;
+    width: 90vw;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 0 2rem;
+    padding: 0;
   }
 
   @media (max-width: 768px) {
@@ -49,7 +40,7 @@ const styles = `
       display: flex;
       flex-direction: column;
       width: 100%;
-      padding: 0 1rem;
+      padding: 0;
       gap: 5vh;
       align-items: center;
     }
@@ -83,7 +74,7 @@ const styles = `
     display: flex;
     flex-direction: column;
     will-change: transform;
-    gap: 10vh;
+    gap: 10vw;
   }
 
   .col-scroll__box--odd .col-scroll__list {
@@ -99,51 +90,42 @@ const styles = `
     }
   }
 
-  .service-card {
+  .product-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0;
     padding: 0;
-    width: 26vw;
-    max-width: 400px;
+    width: 20vw;
     background: transparent;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
 
   @media (max-width: 768px) {
-    .service-card {
+    .product-card {
       width: 90vw;
-      max-width: 100%;
-      margin: 0 0 5vh 0;
+      margin: 0 0 10vh 0;
     }
-    .service-card:last-child {
+    .product-card:last-child {
       margin-bottom: 0;
     }
   }
 
   .col-scroll__img-wrapper {
     position: relative;
-    aspect-ratio: 0.85;
+    aspect-ratio: 0.8;
     width: 100%;
     margin-bottom: 0;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 1.5rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #171717;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 1);
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .dark .col-scroll__img-wrapper {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: #171717;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.03);
   }
 
   .col-scroll__img-wrapper img {
@@ -154,130 +136,126 @@ const styles = `
     bottom: 1rem;
     width: calc(100% - 2rem);
     height: calc(100% - 2rem);
-    object-fit: contain;
-    transition: opacity 0.5s ease-in-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 0.75rem;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
   }
 
   .product-img {
     z-index: 1;
     opacity: 1;
-    padding: 2rem;
   }
 
   .model-img {
     z-index: 2;
     opacity: 0;
-    object-fit: cover !important;
   }
 
-  .service-card:hover .product-img,
-  .service-card:active .product-img {
+  .product-card:hover .product-img,
+  .product-card:active .product-img {
     opacity: 0;
-    transform: scale(0.95);
   }
 
-  .service-card:hover .model-img,
-  .service-card:active .model-img {
+  .product-card:hover .model-img,
+  .product-card:active .model-img {
     opacity: 1;
-    transform: scale(1.05);
   }
 
-  .service-card__info {
+  .product-card__info {
     position: absolute;
-    bottom: 0;
+    bottom: 2rem;
     left: 0;
     width: 100%;
     text-align: center;
     z-index: 3;
-    padding: 2rem 1.5rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    padding: 0 1.5rem;
     box-sizing: border-box;
     transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .product-card:hover .product-card__info,
+  .product-card:active .product-card__info {
     opacity: 0;
     transform: translateY(10px);
   }
-  
-  .service-card:hover .service-card__info,
-  .service-card:active .service-card__info {
-    opacity: 1;
-    transform: translateY(0);
-  }
 
-  .service-card__title-static {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111;
-    margin-top: 1.5rem;
-    transition: opacity 0.3s ease;
-  }
-  
-  .service-card:hover .service-card__title-static {
-    opacity: 0;
-  }
-
-  .service-card__title {
-    margin: 0;
-    font-weight: 600;
-    font-size: 1.5rem;
+  .product-card__title {
+    margin: 0 0 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.25rem;
     line-height: 1.3;
-    color: #ffffff;
+    color: #f4f1ea;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   }
 
-  .service-card__btn {
+  .product-card__price-wrapper {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    color: #f4f1ea;
+  }
+
+  .product-card__price--old {
+    text-decoration: line-through;
+    opacity: 0.5;
+    margin-right: 0.5rem;
+  }
+
+  .product-card__btn {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
     z-index: 4;
     opacity: 0;
-    background: rgba(255, 255, 255, 0.95);
-    border: none;
-    border-radius: 50%;
-    width: 3.5rem;
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: rgba(23, 23, 23, 0.95);
+    border: 1px solid #f4f1ea;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    color: #1f1f1f;
-    transform: scale(0.8) translate(10px, -10px);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    white-space: nowrap;
+    color: #f4f1ea;
   }
 
-  .service-card:hover .service-card__btn,
-  .service-card:active .service-card__btn {
+  .product-card:hover .product-card__btn,
+  .product-card:active .product-card__btn {
     opacity: 1;
-    transform: scale(1) translate(0, 0);
+    transform: translateX(-50%) translateY(0);
   }
 
-  .service-card__btn:hover {
-    background: #111;
-    color: #fff;
-    transform: scale(1.1);
+  .product-card__btn:hover {
+    background: #f4f1ea;
+    color: #1f1f1f;
   }
 
   @media (max-width: 768px) {
-    .service-card__title {
-      font-size: 1.25rem;
+    .product-card__title {
+      font-size: 1.1rem;
+    }
+    .product-card__price-wrapper {
+      font-size: 1rem;
+    }
+    .product-card__btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.7rem;
     }
   }
 `;
 
-export function ExecutiveImpactCarousel({ services }: ServicesCarouselProps) {
+export function ExecutiveImpactCarousel({ products }: { products: Product[] }) {
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Split into 3 columns dynamically based on max number of items
-    const colSize = Math.ceil(services.length / 3);
-    const col1 = services.slice(0, colSize);
-    const col2 = services.slice(colSize, colSize * 2);
-    const col3 = services.slice(colSize * 2, services.length);
+    const colSize = Math.ceil(products.length / 3);
+    const col1 = products.slice(0, colSize);
+    const col2 = products.slice(colSize, colSize * 2);
+    const col3 = products.slice(colSize * 2, products.length);
 
     useLayoutEffect(() => {
         if (!containerRef.current) return;
 
-        // Only apply scroll animation on desktop
         const mm = gsap.matchMedia();
 
         mm.add("(min-width: 769px)", () => {
@@ -291,80 +269,78 @@ export function ExecutiveImpactCarousel({ services }: ServicesCarouselProps) {
                     const scrollDistance = elementHeight + viewportHeight + extraSpace;
 
                     gsap.to(element, {
-                        yPercent: 100,
+                        yPercent: 50,
+                        ease: "none",
                         scrollTrigger: {
-                            trigger: element,
-                            start: 0,
-                            end: \`+=\${scrollDistance}\`,
-              scrub: true,
-              pin: true,
-            }
-          });
+                            trigger: containerRef.current,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true,
+                        }
+                    });
+                });
+            }, containerRef);
+
+            return () => ctx.revert();
         });
-      }, containerRef);
 
-      return () => ctx.revert();
-    });
+        return () => mm.revert();
+    }, [products]);
 
-    return () => mm.revert();
-  }, [services]);
+    return (
+        <>
+            <style dangerouslySetInnerHTML={{ __html: styles }} />
+            <main className="products-carousel">
+                <div ref={containerRef} className="col-scroll">
+                    <div className="col-scroll__box col-scroll__box--odd">
+                        <div className="col-scroll__list">
+                            {col1.map((prod) => (
+                                <ProductCard key={prod.id} product={prod} />
+                            ))}
+                        </div>
+                    </div>
 
-  return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: styles }} />
-      <div className="services-carousel">
-        <div ref={containerRef} className="col-scroll">
-          {/* Column 1 (Odd - reverse scroll) */}
-          <div className="col-scroll__box col-scroll__box--odd">
-            <div className="col-scroll__list">
-              {col1.map((service, idx) => (
-                <ServiceCard key={idx} service={service} />
-              ))}
-            </div>
-          </div>
+                    <div className="col-scroll__box">
+                        <div className="col-scroll__list">
+                            {col2.map((prod) => (
+                                <ProductCard key={prod.id} product={prod} />
+                            ))}
+                        </div>
+                    </div>
 
-          {/* Column 2 (Even - normal scroll) */}
-          <div className="col-scroll__box">
-            <div className="col-scroll__list">
-              {col2.map((service, idx) => (
-                <ServiceCard key={idx} service={service} />
-              ))}
-            </div>
-          </div>
-
-          {/* Column 3 (Odd - reverse scroll) */}
-          <div className="col-scroll__box col-scroll__box--odd">
-            <div className="col-scroll__list">
-              {col3.map((service, idx) => (
-                <ServiceCard key={idx} service={service} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+                    <div className="col-scroll__box col-scroll__box--odd">
+                        <div className="col-scroll__list">
+                            {col3.map((prod) => (
+                                <ProductCard key={prod.id} product={prod} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </>
+    );
 }
 
-function ServiceCard({ service }: { service: ServiceItem }) {
-  return (
-    <figure className="service-card group">
-      <div className="col-scroll__img-wrapper">
-        {/* Real life stock image on hover */}
-        <img className="model-img" src={service.modelImg} alt={\`Real life representation of \${service.name}\`} />
-        
-        {/* Icon / graphic image standard state */}
-        <img className="product-img" src={service.image} alt={service.name} />
-        
-        <div className="service-card__info">
-          <h3 className="service-card__title">{service.name}</h3>
-        </div>
+function ProductCard({ product }: { product: Product }) {
+    return (
+        <figure className="product-card">
+            <div className="col-scroll__img-wrapper">
+                <img className="product-img" src={product.prodImg} alt={product.title} />
+                {/* On hover show the model vector graphic */}
+                <img className="model-img" src={product.modelImg} style={{ objectFit: "contain", padding: "1rem" }} alt={"Model " + product.title} />
 
-        <button className="service-card__btn">
-          <ArrowUpRight className="w-5 h-5" />
-        </button>
-      </div>
-      <h3 className="service-card__title-static">{service.name}</h3>
-    </figure>
-  );
+                <div className="product-card__info">
+                    <h3 className="product-card__title">{product.title}</h3>
+                    <div className="product-card__price-wrapper">
+                        {product.oldPrice && (
+                            <span className="product-card__price--old">{product.oldPrice}</span>
+                        )}
+                        <span className="product-card__price">{product.price}</span>
+                    </div>
+                </div>
+
+                <button className="product-card__btn">Explore +</button>
+            </div>
+        </figure>
+    );
 }
