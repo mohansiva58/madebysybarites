@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Star } from "lucide-react"
 
@@ -98,110 +98,76 @@ const BrandingMockup = () => (
   </div>
 )
 
-const ArchCard = ({ height, width, radius, label, isImage, children, className, delay = 0 }: { height: string, width: string, radius: string, label: string, isImage?: boolean, children: React.ReactNode, className?: string, delay?: number }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.9, y: 50 }}
-    animate={{ opacity: 1, scale: 1, y: 0 }}
-    transition={{ duration: 0.8, delay, ease: "easeOut" }}
-    className={`relative flex justify-center items-end shrink-0 ${className}`}
-    style={{
-      width: width,
-      height: height,
-      borderRadius: `${radius} ${radius} 0 0`,
-      overflow: "hidden",
-      background: "#ffffff",
-      boxShadow: "0 20px 60px rgba(0, 0, 0, 0.12)",
-      border: "3px solid #d8dafb",
-    }}
-  >
-    {/* Container for the mockup */}
-    <div className={`absolute ${isImage ? 'inset-0 w-full h-full' : 'top-10 left-[5%] w-[90%] h-[90%] drop-shadow-2xl'} transition-transform duration-500 hover:scale-[1.04] origin-bottom cursor-pointer`}>
-      {children}
-    </div>
-    {!isImage && <span className="text-gray-400 text-[11px] font-bold uppercase tracking-[0.15em] z-10 mb-8">{label}</span>}
-  </motion.div>
-)
+const ArchCard = ({ height, width, radius, label, isImage, children, className }: { height: string, width: string, radius: string, label: string, isImage?: boolean, children: React.ReactNode, className?: string }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0.4);
 
-const CARDS_DATA = [
-  { id: 1, img: "/works/project3.png", label: "Web", h: "40vh", w: "150px", r: "75px" },
-  { id: 2, img: "/works/project1.png", label: "Apps", h: "45vh", w: "155px", r: "77.5px" },
-  { id: 3, img: "/works/project2.png", label: "SaaS", h: "50vh", w: "160px", r: "80px" },
-  { id: 4, img: "/works/project4.png", label: "Brand", h: "55vh", w: "165px", r: "82.5px" },
-  { id: 5, img: "/works/project5.png", label: "Design", h: "60vh", w: "170px", r: "85px" },
-  { id: 6, img: "/works/project6.png", label: "Mobile", h: "65vh", w: "175px", r: "87.5px" },
-  { id: 7, img: "/works/project7.png", label: "Product", h: "70vh", w: "180px", r: "90px" },
-  { id: 8, img: "/works/project8.png", label: "UI/UX", h: "75vh", w: "185px", r: "92.5px" },
-  { id: 9, img: "/works/project9.png", label: "Creative", h: "80vh", w: "190px", r: "95px" },
-]
-
-export function HeroSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const container = scrollRef.current;
-    if (!container) return;
-
     let animationFrameId: number;
-    let isInterrupted = false;
 
-    const totalScroll = container.scrollWidth - container.clientWidth;
+    const updateScale = () => {
+      if (!cardRef.current) return;
 
-    // Phase 1: Instant start at the beginning (Small cards)
-    container.scrollLeft = 0;
+      const rect = cardRef.current.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
 
-    // Phase 2: Intro preview (Slide to Large cards)
-    // This gives a quick glimpse of the mountain peak
-    const introTimer = setTimeout(() => {
-      container.scrollTo({ left: totalScroll, behavior: "smooth" });
-    }, 1000);
+      // Calculate position relative to the viewport (0 = far left, 1 = far right)
+      // We use the center of the card for the calculation
+      const cardMid = rect.left + rect.width / 2;
+      const progress = Math.max(0, Math.min(1, cardMid / viewportWidth));
 
-    // Phase 3: Slow cinematic one-way glide back to the start (Small cards)
-    // This keeps the layout "moving" and alive
-    const glideTimer = setTimeout(() => {
-      if (isInterrupted) return;
+      // Rising slope: Scale from 0.35 at the left to 1.0 at the right margin
+      const finalScale = 0.35 + (progress * 0.65);
 
-      const duration = 25000; // 25 seconds for a premium, slow glide
-      let startTime: number | null = null;
-
-      const animateGlide = (currentTime: number) => {
-        if (isInterrupted) return;
-        if (!startTime) startTime = currentTime;
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-
-        // Reverse direction: Glide from Max towards 0
-        container.scrollLeft = totalScroll * (1 - progress);
-
-        if (progress < 1) {
-          animationFrameId = requestAnimationFrame(animateGlide);
-        }
-      };
-
-      animationFrameId = requestAnimationFrame(animateGlide);
-    }, 4500);
-
-    // Stop automation if user interacts
-    const handleInteraction = () => {
-      isInterrupted = true;
-      cancelAnimationFrame(animationFrameId);
+      setScale(finalScale);
+      animationFrameId = requestAnimationFrame(updateScale);
     };
 
-    container.addEventListener('mousedown', handleInteraction);
-    container.addEventListener('wheel', handleInteraction);
-    container.addEventListener('touchstart', handleInteraction);
-
-    return () => {
-      clearTimeout(introTimer);
-      clearTimeout(glideTimer);
-      cancelAnimationFrame(animationFrameId);
-      container.removeEventListener('mousedown', handleInteraction);
-      container.removeEventListener('wheel', handleInteraction);
-      container.removeEventListener('touchstart', handleInteraction);
-    };
+    animationFrameId = requestAnimationFrame(updateScale);
+    return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
   return (
-    <section className="relative w-full h-[85vh] min-h-[700px] xl:min-h-[750px] overflow-hidden bg-white selection:bg-[#E6E5FF] selection:text-black">
+    <motion.div
+      ref={cardRef}
+      className={`relative flex justify-center items-end shrink-0 ${className}`}
+      style={{
+        width: width,
+        height: height,
+        borderRadius: `${radius} ${radius} 0 0`,
+        overflow: "hidden",
+        background: "#ffffff",
+        boxShadow: "0 20px 60px rgba(0, 0, 0, 0.12)",
+        border: "3px solid #d8dafb",
+        scaleY: scale,
+        originY: 1, // Grow from bottom-up
+      }}
+    >
+      {/* Container for the mockup */}
+      <div className={`absolute ${isImage ? 'inset-0 w-full h-full' : 'top-10 left-[5%] w-[90%] h-[90%] drop-shadow-2xl'} transition-transform duration-500 hover:scale-[1.04] origin-bottom cursor-pointer`}>
+        {children}
+      </div>
+      {!isImage && <span className="text-gray-400 text-[11px] font-bold uppercase tracking-[0.15em] z-10 mb-8">{label}</span>}
+    </motion.div>
+  );
+}
+
+const CARDS_DATA = [
+  { id: 1, img: "/works/project3.png", label: "Web", h: "80vh", w: "220px", r: "110px" },
+  { id: 2, img: "/works/project1.png", label: "Apps", h: "80vh", w: "220px", r: "110px" },
+  { id: 3, img: "/works/project2.png", label: "SaaS", h: "80vh", w: "220px", r: "110px" },
+  { id: 4, img: "/works/project4.png", label: "Brand", h: "80vh", w: "220px", r: "110px" },
+  { id: 5, img: "/works/project5.png", label: "Design", h: "80vh", w: "220px", r: "110px" },
+  { id: 6, img: "/works/project6.png", label: "Mobile", h: "80vh", w: "220px", r: "110px" },
+  { id: 7, img: "/works/project7.png", label: "Product", h: "80vh", w: "220px", r: "110px" },
+  { id: 8, img: "/works/project8.png", label: "UI/UX", h: "80vh", w: "220px", r: "110px" },
+  { id: 9, img: "/works/project9.png", label: "Creative", h: "80vh", w: "220px", r: "110px" },
+]
+
+export function HeroSection() {
+  return (
+    <section className="relative w-full h-[85vh] min-h-[715px] xl:min-h-[765px] overflow-hidden bg-white selection:bg-[#E6E5FF] selection:text-black">
 
       {/* Background shape mimicking the reference slant */}
       <div
@@ -272,28 +238,45 @@ export function HeroSection() {
 
         </div>
 
-        {/* Full-Width Cards Section with Cinematic One-Way Motion */}
+        {/* Infinite Dynamic Mountain Loop */}
         <div className="absolute inset-0 w-full h-full z-10 overflow-hidden pointer-events-none">
           {/* Gradient mask to protect text on the left */}
           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent z-20 w-[60%] hidden lg:block" />
 
-          <div
-            ref={scrollRef}
-            className="absolute bottom-0 right-0 w-full h-[85vh] overflow-x-auto scrollbar-hide flex items-end gap-[48px] px-12 lg:pl-[45vw] lg:pr-24 pb-0 z-10 select-none pointer-events-auto"
-          >
-            {CARDS_DATA.map((card, idx) => (
-              <ArchCard
-                key={card.id}
-                height={card.h}
-                width={card.w}
-                radius={card.r}
-                label={card.label}
-                isImage
-                delay={0.8 + idx * 0.1}
-              >
-                <img src={card.img} alt={card.label} className="w-full h-full object-cover" />
-              </ArchCard>
-            ))}
+          <div className="absolute bottom-0 right-0 w-full h-[85vh] overflow-hidden pointer-events-auto">
+            <motion.div
+              className="flex items-end gap-[48px] h-full absolute bottom-0 left-0 px-24"
+              animate={{
+                x: ["-50%", "0%"]
+              }}
+              transition={{
+                duration: 40,
+                ease: "linear",
+                repeat: Infinity
+              }}
+              style={{ width: "max-content" }}
+            >
+              {/* Double the array for seamless loop */}
+              {[...CARDS_DATA, ...CARDS_DATA].map((card, idx) => (
+                <motion.div
+                  key={`${card.id}-${idx}`}
+                  className="shrink-0"
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 + (idx % 9) * 0.1 }}
+                >
+                  <ArchCard
+                    height={card.h}
+                    width={card.w}
+                    radius={card.r}
+                    label={card.label}
+                    isImage
+                  >
+                    <img src={card.img} alt={card.label} className="w-full h-full object-cover" />
+                  </ArchCard>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
 

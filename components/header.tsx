@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -14,18 +14,43 @@ const navItems = [
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Hide logo when scrolled past the hero section
+      // Hero section is approx 85vh, using a fixed pixel threshold or relative window height
+      if (window.scrollY > window.innerHeight * 0.8) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    // Run once on mount to handle initial scroll position
+    handleScroll()
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <>
-      <header className="absolute top-0 left-0 right-0 z-50 w-full pt-8 px-6 lg:px-12 bg-transparent lg:pointer-events-auto">
-        <div className="max-w-[1700px] mx-auto flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full pt-8 px-6 lg:px-12 bg-transparent lg:pointer-events-auto transition-all">
+        <div className="max-w-[1700px] mx-auto flex items-center justify-between relative">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 relative z-10 hover:opacity-80 transition-opacity">
+          <Link
+            href="/"
+            className={cn(
+              "flex items-center gap-2 relative z-10 transition-all duration-500",
+              isScrolled ? "opacity-0 -translate-x-4 pointer-events-none" : "opacity-100 hover:opacity-80 translate-x-0"
+            )}
+          >
             <img src="/works/madebysybariteslogo.png" alt="MADEBYSYBARITES" className="h-14 md:h-16 w-auto object-contain" />
           </Link>
 
           {/* Centered Navigation - Desktop */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 ml-[5%]">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 ml-[5%] bg-white/20 backdrop-blur-lg border border-white/60 shadow-md rounded-full px-8 py-3">
             {navItems.map((item) => (
               <Link
                 key={item.label}

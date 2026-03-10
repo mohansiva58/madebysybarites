@@ -17,12 +17,13 @@ export default function Home() {
     <main className="min-h-screen bg-[#f8fafc]">
       <Header />
       <HeroSection />
+      <ServicesComponentMinimal />
       {/* <ProjectShowcase /> */}
       <LogoCarousel />
       <ChallengesSection />
       <WhyChooseUs />
       <HowToGetStarted />
-      <ServicesComponentMinimal />
+      
       <OurWorks />
       <Achievements />
       <FAQSection />
