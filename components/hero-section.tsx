@@ -206,35 +206,7 @@ export function HeroSection() {
             </p>
           </motion.div>
 
-          {/* Client Review Box matching exact Ivory Mode UI */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-12 md:mt-16 bg-[#aeb2d8] rounded-[32px] p-6 lg:p-7 w-[90%] max-w-[340px] shadow-lg relative border border-[#c4c7e6] backdrop-blur-md"
-          >
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="text-[2.5rem] md:text-[3rem] text-white font-light leading-none tracking-tight -ml-1">400<span className="text-[2rem] font-normal align-top">+</span></h3>
-                <p className="text-white/90 text-[13px] tracking-wide mt-2">Projects Delivered</p>
-              </div>
-              <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors shadow-sm">
-                <ArrowRight className="w-5 h-5 text-gray-800" strokeWidth={2.5} />
-              </button>
-            </div>
-
-            <div className="flex items-center gap-6 mt-8">
-              <div className="flex -space-x-3">
-                {["/avatar-1.jpg", "/avatar-2.jpg", "/avatar-3.jpg", "/placeholder.jpg"].map((src, i) => (
-                  <img key={i} src={src} className="w-10 h-10 md:w-11 md:h-11 rounded-full border-2 border-[#aeb2d8] object-cover bg-gray-200" alt="avatar" />
-                ))}
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Star className="w-4 h-4 md:w-5 md:h-5 fill-white text-white" />
-                <span className="text-white font-medium text-[14px] md:text-[16px]">5 Stars</span>
-              </div>
-            </div>
-          </motion.div>
+        
 
         </div>
 

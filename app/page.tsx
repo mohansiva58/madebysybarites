@@ -9,6 +9,8 @@ import { WhyChooseUs } from "@/components/why-choose-us"
 import { HowToGetStarted } from "@/components/how-to-get-started"
 import ServicesComponentMinimal from "@/components/services"
 import { OurWorks } from "@/components/our-works"
+import AboutUsSection from "@/components/about-us"
+import TestimonialsSection from "@/components/testimonials"
 import { Achievements } from "@/components/achievements"
 import FAQSection from "@/components/faq-section"
 
@@ -22,12 +24,14 @@ export default function Home() {
       {/* <ProjectShowcase /> */}
       <LogoCarousel />
       <OurWorks />
-      <ChallengesSection />
-      <WhyChooseUs />
-      <HowToGetStarted />
+      <AboutUsSection />
+      <TestimonialsSection />
+      {/* <ChallengesSection /> */}
+      {/* <WhyChooseUs /> */}
+      {/* <HowToGetStarted /> */}
       
       
-      <Achievements />
+      {/* <Achievements /> */}
       <FAQSection />
       <SiteFooter />
     </main>

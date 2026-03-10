@@ -8,8 +8,10 @@ import { cn } from "@/lib/utils"
 const navItems = [
   { label: "Services", href: "/#services" },
   { label: "Our Works", href: "/#our-works" },
-  { label: "Achievements", href: "/#achievements" },
+  { label: "About", href: "/#about" },
+ 
   { label: "FAQ's", href: "/#faqs" },
+   
 ]
 
 export function Header() {
@@ -105,18 +107,7 @@ export function Header() {
               {item.label}
             </Link>
           ))}
-          <div className="flex flex-col gap-4 mt-8 w-full max-w-[200px]">
-            <Link href="https://wa.me/919701630276" className="w-full" onClick={() => setIsOpen(false)}>
-              <button className="w-full py-3 text-center border border-gray-200 rounded-full font-bold">
-                Login
-              </button>
-            </Link>
-            <Link href="https://wa.me/919701630276" className="w-full" onClick={() => setIsOpen(false)}>
-              <button className="w-full py-3 text-center bg-black text-white rounded-full font-bold">
-                Sign Up
-              </button>
-            </Link>
-          </div>
+        
         </nav>
       </div>
     </>
