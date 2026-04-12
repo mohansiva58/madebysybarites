@@ -71,12 +71,12 @@ const services: Product[] = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative bg-[#dec39e]">
+    <section id="services" className="relative bg-white">
       <div className="pt-24 pb-8 max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111] tracking-tight">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
           What We Build
         </h2>
-        <p className="mt-6 text-xl text-gray-900 max-w-2xl mx-auto">
+        <p className="mt-6 text-xl text-slate-600 max-w-2xl mx-auto">
           We craft scalable, immersive, and high-performance digital products — from hyper-growth startups to enterprise platforms.
         </p>
       </div>

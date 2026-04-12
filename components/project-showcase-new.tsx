@@ -61,12 +61,12 @@ const projects = [
 
 export function ProjectShowcaseNew() {
   return (
-    <section id="our-works" className="w-full bg-white py-12 md:py-20">
+    <section id="our-works" className="w-full bg-white py-8 md:py-12">
       {/* Section Header with Landing Animations */}
       <ProjectsSectionHeader />
 
-      {/* Projects Grid */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-12">
+      {/* Projects Grid with Staggered Animation */}
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {projects.map((project, idx) => (
             <div key={idx} className={project.featured ? "md:col-span-2" : ""}>
@@ -77,10 +77,10 @@ export function ProjectShowcaseNew() {
       </div>
 
       {/* Bottom CTA Section */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-12 text-center">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 text-center">
         <div className="space-y-4">
           <p className="text-lg text-[#475569]">
-            Want to see more of our work?
+            Ready to build something amazing together?
           </p>
           <a
             href="#contact"

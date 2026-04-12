@@ -44,9 +44,9 @@ export function ProjectShowcaseCard({
       }`}
     >
       {/* Card Background - Light gradient */}
-      <div className="relative bg-white overflow-hidden rounded-2xl shadow-card hover:shadow-floating transition-all duration-300">
+      <div className="relative bg-white overflow-hidden rounded-2xl light-shadow-card hover:light-shadow-hover transition-all duration-300">
         {/* Image Container */}
-        <div className="relative w-full aspect-[16/10] overflow-hidden bg-gradient-to-br from-blue-50 to-teal-50">
+        <div className="relative w-full aspect-[16/10] overflow-hidden bg-gradient-to-br from-[#f0f7ff] to-[#f0fdf9]">
           <Image
             src={image}
             alt={title}
@@ -62,14 +62,14 @@ export function ProjectShowcaseCard({
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-gradient-to-t from-blue-500/10 via-transparent to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-[#0958ff]/8 via-transparent to-transparent"
           />
 
           {/* Image Border Glow on Hover */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
-            className="absolute inset-0 border border-blue-200 rounded-2xl pointer-events-none"
+            className="absolute inset-0 border border-[#11c7b7]/20 rounded-2xl pointer-events-none"
           />
         </div>
 
@@ -95,7 +95,7 @@ export function ProjectShowcaseCard({
                   whileInView={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-br from-blue-50 to-teal-50 p-3 rounded-xl border border-blue-100"
+                  className="bg-gradient-to-br from-[#f0f7ff] to-[#f0fdf9] p-3 rounded-xl border border-[#11c7b7]/20"
                 >
                   <p className="text-xs text-[#475569] font-medium uppercase tracking-wider">
                     {metric.label}
@@ -117,7 +117,7 @@ export function ProjectShowcaseCard({
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
                 viewport={{ once: true }}
-                className="px-3 py-1.5 bg-gradient-to-r from-blue-50 to-teal-50 border border-blue-100 text-xs font-semibold text-[#0958ff] rounded-full"
+                className="px-3 py-1.5 bg-gradient-to-r from-[#f0f7ff] to-[#f0fdf9] border border-[#11c7b7]/20 text-xs font-semibold text-[#0958ff] rounded-full"
               >
                 {tag}
               </motion.span>
@@ -147,7 +147,7 @@ export function ProjectShowcaseCard({
                   rel="noreferrer"
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-[#0958ff] text-[#0958ff] font-semibold rounded-xl transition-all duration-300 hover:bg-blue-50"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-[#0958ff] text-[#0958ff] font-semibold rounded-xl transition-all duration-300 hover:bg-[#f0f7ff]"
                 >
                   <span>Source Code</span>
                   <ArrowUpRight size={16} />
