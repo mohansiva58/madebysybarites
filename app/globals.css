@@ -228,3 +228,34 @@ img {
 button, a, input, textarea, select {
   transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Interactive Card Optimizations */
+.group {
+  perspective: 1000px;
+}
+
+/* Ensure 3D transforms render on GPU */
+.group > div {
+  will-change: transform, filter;
+  transform: translateZ(0);
+}
+
+/* Optimize hover states */
+@media (hover: hover) {
+  .group {
+    /* Only apply 3D effects on devices that support hover */
+    --perspective-enabled: 1;
+  }
+}
+
+/* Disable 3D transforms on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .group > div {
+    will-change: auto;
+    transform: none !important;
+  }
+
+  .group:hover > div {
+    transform: none !important;
+  }
+}
