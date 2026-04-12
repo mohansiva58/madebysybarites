@@ -8,7 +8,7 @@ import { FloatingNav } from "@/components/floating-nav"
 import { WhyChooseUs } from "@/components/why-choose-us"
 import { HowToGetStarted } from "@/components/how-to-get-started"
 import ServicesComponentMinimal from "@/components/services"
-import { OurWorks } from "@/components/our-works"
+import { ProjectShowcaseNew } from "@/components/project-showcase-new"
 import AboutUsSection from "@/components/about-us"
 import TestimonialsSection from "@/components/testimonials"
 import { Achievements } from "@/components/achievements"
@@ -23,7 +23,7 @@ export default function Home() {
 
       {/* <ProjectShowcase /> */}
       <LogoCarousel />
-      <OurWorks />
+      <ProjectShowcaseNew />
       <AboutUsSection />
       <TestimonialsSection />
       {/* <ChallengesSection /> */}
