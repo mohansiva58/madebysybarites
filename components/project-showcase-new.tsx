@@ -1,6 +1,7 @@
 "use client"
 
-import { ProjectInteractiveCard } from "./project-interactive-card"
+import { ProjectCardSimple } from "./project-card-simple"
+import { ProjectCarouselContainer } from "./project-carousel-container"
 import { ProjectsSectionHeader } from "./projects-section-header"
 
 // Project data with trust-building metrics
@@ -61,27 +62,34 @@ const projects = [
 
 export function ProjectShowcaseNew() {
   return (
-    <section id="our-works" className="w-full bg-white py-8 md:py-12">
+    <section id="our-works" className="w-full bg-white">
       {/* Section Header with Landing Animations */}
       <ProjectsSectionHeader />
 
-      {/* Projects Grid with Staggered Animation */}
-      <div className="max-w-6xl mx-auto px-4 md:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-max">
-          {projects.map((project, idx) => (
-            <ProjectInteractiveCard
-              key={idx}
-              {...project}
-              link={project.live}
+      {/* Carousel Container with Cursor-based Horizontal Scroll */}
+      <ProjectCarouselContainer>
+        {projects.map((project, idx) => (
+          <div
+            key={idx}
+            className="lg:w-96 h-full flex-shrink-0"
+          >
+            <ProjectCardSimple
+              id={`project-${idx}`}
+              title={project.title}
+              image={project.image}
+              client={project.tags[0]}
+              live={project.live}
+              github={project.github}
+              tags={project.tags}
             />
-          ))}
-        </div>
-      </div>
+          </div>
+        ))}
+      </ProjectCarouselContainer>
 
       {/* Bottom CTA Section */}
       <div className="max-w-6xl mx-auto px-4 md:px-8 py-16 text-center">
         <div className="space-y-4">
-          <p className="text-lg text-[#475569]">
+          <p className="text-lg text-slate-600">
             Ready to build something amazing together?
           </p>
           <a

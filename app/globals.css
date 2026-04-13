@@ -259,3 +259,23 @@ button, a, input, textarea, select {
     transform: none !important;
   }
 }
+
+/* Carousel Scrollbar Hiding */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize carousel performance */
+.scrollbar-hide > div {
+  will-change: scroll-position;
+}
