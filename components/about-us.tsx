@@ -56,7 +56,7 @@ export default function AboutUsSection() {
   const services = [
     {
       icon: <Search className="w-6 h-6" />,
-      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
+      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-[#8b5cf6]" />,
       title: "01 — Discovery",
       description:
         "We start by deeply understanding your goals, target audience, and requirements — laying a clear, shared foundation before a single line of code is written.",
@@ -64,7 +64,7 @@ export default function AboutUsSection() {
     },
     {
       icon: <Palette className="w-6 h-6" />,
-      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
+      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-[#ec4899]" />,
       title: "02 — Design",
       description:
         "From wireframes to high-fidelity mockups, we craft intuitive UI/UX that aligns with your brand identity and creates experiences users genuinely love.",
@@ -72,7 +72,7 @@ export default function AboutUsSection() {
     },
     {
       icon: <Code2 className="w-6 h-6" />,
-      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
+      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-[#8b5cf6]" />,
       title: "03 — Development",
       description:
         "Clean, scalable code built with the right stack for your product. We turn approved designs into fully functional, high-performance digital products.",
@@ -80,7 +80,7 @@ export default function AboutUsSection() {
     },
     {
       icon: <ShieldCheck className="w-6 h-6" />,
-      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
+      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-[#ec4899]" />,
       title: "04 — Testing & QA",
       description:
         "Rigorous testing across devices, browsers, and edge cases ensures your product is bug-free, secure, and ready to handle the real world with confidence.",
@@ -88,7 +88,7 @@ export default function AboutUsSection() {
     },
     {
       icon: <Rocket className="w-6 h-6" />,
-      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
+      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-[#8b5cf6]" />,
       title: "05 — Launch",
       description:
         "We handle deployment with precision — getting your product live smoothly, with zero downtime, full monitoring, and a seamless go-live experience.",
@@ -96,7 +96,7 @@ export default function AboutUsSection() {
     },
     {
       icon: <TrendingUp className="w-6 h-6" />,
-      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
+      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-[#ec4899]" />,
       title: "06 — Growth & Support",
       description:
         "Post-launch, we monitor, optimize, and support your product — helping you iterate fast, scale confidently, and stay ahead of the curve.",
@@ -115,24 +115,24 @@ export default function AboutUsSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="w-full py-24 px-4 bg-gradient-to-b from-[#f8fafc] to-[#f0f0f0] text-slate-900 overflow-hidden relative"
+      className="w-full py-24 px-4 bg-gradient-to-b from-[#faf5ff] to-[#fce7f3] text-slate-900 overflow-hidden relative"
     >
       {/* Decorative background blobs */}
       <motion.div
-        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[#6cbcc4]/10 blur-3xl"
+        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[#8b5cf6]/10 blur-3xl"
         style={{ y: y1, rotate: rotate1 }}
       />
       <motion.div
-        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-slate-300/20 blur-3xl"
+        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-[#ec4899]/10 blur-3xl"
         style={{ y: y2, rotate: rotate2 }}
       />
       <motion.div
-        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#6cbcc4]/40"
+        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#ec4899]/40"
         animate={{ y: [0, -15, 0], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-[#6cbcc4]/30"
+        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-[#8b5cf6]/30"
         animate={{ y: [0, 20, 0], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
@@ -146,7 +146,7 @@ export default function AboutUsSection() {
         {/* Header */}
         <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
           <motion.span
-            className="text-[#6cbcc4] font-medium mb-2 flex items-center gap-2"
+            className="text-[#8b5cf6] font-medium mb-2 flex items-center gap-2"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -156,7 +156,7 @@ export default function AboutUsSection() {
           </motion.span>
           <h2 className="text-4xl md:text-5xl font-light mb-4 text-center text-slate-900">About Us</h2>
           <motion.div
-            className="h-1 bg-[#6cbcc4] rounded-full"
+            className="h-1 bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] rounded-full"
             initial={{ width: 0 }}
             animate={{ width: 96 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -221,21 +221,21 @@ export default function AboutUsSection() {
               </motion.div>
 
               <motion.div
-                className="absolute inset-0 border-4 border-[#6cbcc4]/40 rounded-md -m-3 z-[-1]"
+                className="absolute inset-0 border-4 border-[#8b5cf6]/40 rounded-md -m-3 z-[-1]"
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               />
 
               <motion.div
-                className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-[#6cbcc4]/10"
+                className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-[#ec4899]/10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.9 }}
                 style={{ y: y1 }}
               />
               <motion.div
-                className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-[#6cbcc4]/10"
+                className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-[#8b5cf6]/10"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.1 }}
@@ -243,7 +243,7 @@ export default function AboutUsSection() {
               />
 
               <motion.div
-                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#6cbcc4]"
+                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#ec4899]"
                 animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               />

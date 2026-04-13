@@ -11,40 +11,45 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* madebysybarites Color Palette */
-  --cd-primary: #0958ff;
-  --cd-primary-dark: #0638b7;
-  --cd-accent: #11c7b7;
+  /* Creative Agency Color Palette */
+  --cd-primary: #8b5cf6;
+  --cd-primary-dark: #7c3aed;
+  --cd-accent: #ec4899;
   --cd-text: #0f1724;
   --cd-subtext: #475569;
   --cd-muted: #cbd5e1;
   --cd-bg: #ffffff;
-  --cd-surface: #f8fafc;
+  --cd-surface: #faf5ff;
   --cd-success: #10b981;
   --cd-warning: #f59e0b;
   --cd-error: #ef4444;
 
-  /* Design System Tokens */
+  /* Design System Tokens - Creative Agency */
   --background: #ffffff;
   --foreground: #0f1724;
   --card: #ffffff;
   --card-foreground: #0f1724;
   --popover: #ffffff;
   --popover-foreground: #0f1724;
-  --primary: #0958ff;
+  --primary: #8b5cf6;
   --primary-foreground: #ffffff;
-  --secondary: #f8fafc;
+  --secondary: #faf5ff;
   --secondary-foreground: #0f1724;
-  --muted: #f8fafc;
+  --muted: #faf5ff;
   --muted-foreground: #475569;
-  --accent: #11c7b7;
+  --accent: #ec4899;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #ef4444;
-  --border: #e2e8f0;
-  --input: #e2e8f0;
-  --ring: #0958ff;
+  --border: #f3e8ff;
+  --input: #f3e8ff;
+  --ring: #8b5cf6;
   --radius: 0.5rem;
+
+  /* Creative Agency Gradient */
+  --gradient-pink: #fce7f3;
+  --gradient-purple: #ede9fe;
+  --gradient-orange: #fed7aa;
 
   /* Shadows */
   --shadow-card: 0px 8px 20px rgba(12, 24, 48, 0.06);
