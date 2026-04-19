@@ -40,7 +40,7 @@ export default function AboutUsSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   }
 
@@ -115,9 +115,16 @@ export default function AboutUsSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="w-full py-24 px-4 bg-gradient-to-b from-[#f8fafc] to-[#f0f0f0] text-slate-900 overflow-hidden relative"
+      className="w-full py-24 px-4 bg-gradient-to-b from-blue-100/35 to-white text-slate-900 overflow-hidden relative"
     >
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-gradient-to-br from-pink-300/35 to-transparent rounded-full blur-2xl"></div>
+      </div>
       {/* Decorative background blobs */}
+      <div className="relative z-10">
       <motion.div
         className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[#6cbcc4]/10 blur-3xl"
         style={{ y: y1, rotate: rotate1 }}
@@ -149,7 +156,7 @@ export default function AboutUsSection() {
             className="text-[#6cbcc4] font-medium mb-2 flex items-center gap-2"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.05 }}
           >
             <Zap className="w-4 h-4" />
             OUR APPROACH
@@ -159,7 +166,7 @@ export default function AboutUsSection() {
             className="h-1 bg-[#6cbcc4] rounded-full"
             initial={{ width: 0 }}
             animate={{ width: 96 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 1.1, delay: 0.08 }}
           />
         </motion.div>
 
@@ -195,7 +202,7 @@ export default function AboutUsSection() {
                 className="rounded-md overflow-hidden shadow-xl"
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
                 whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
               >
                 <img
@@ -207,7 +214,7 @@ export default function AboutUsSection() {
                   className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent flex items-end justify-center p-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.9 }}
+                  transition={{ duration: 0.9, delay: 0.4 }}
                 >
                   <motion.a
                     href="/#our-works"
@@ -224,21 +231,21 @@ export default function AboutUsSection() {
                 className="absolute inset-0 border-4 border-[#6cbcc4]/40 rounded-md -m-3 z-[-1]"
                 initial={{ opacity: 0, scale: 1.1 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
+                transition={{ duration: 0.9, delay: 0.15 }}
               />
 
               <motion.div
                 className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-[#6cbcc4]/10"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.9 }}
+                transition={{ duration: 1.1, delay: 0.2 }}
                 style={{ y: y1 }}
               />
               <motion.div
                 className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-[#6cbcc4]/10"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.1 }}
+                transition={{ duration: 1.1, delay: 0.25 }}
                 style={{ y: y2 }}
               />
 
@@ -296,6 +303,7 @@ export default function AboutUsSection() {
 
       
       </motion.div>
+      </div>
     </section>
   )
 }
@@ -315,14 +323,14 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
     <motion.div
       className="flex flex-col group"
       variants={variants}
-      transition={{ delay }}
+      transition={{ delay: delay * 0.5 }}
       whileHover={{ y: -5, transition: { duration: 0.2 } }}
     >
       <motion.div
         className="flex items-center gap-3 mb-3"
         initial={{ x: direction === "left" ? -20 : 20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: delay + 0.2 }}
+        transition={{ duration: 0.7, delay: delay * 0.5 + 0.05 }}
       >
         <motion.div
           className="text-[#6cbcc4] bg-[#6cbcc4]/10 p-3 rounded-lg transition-colors duration-300 group-hover:bg-[#6cbcc4]/20 relative"
@@ -339,7 +347,7 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
         className="text-sm text-slate-600 leading-relaxed pl-12"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: delay + 0.4 }}
+        transition={{ duration: 0.7, delay: delay * 0.5 + 0.1 }}
       >
         {description}
       </motion.p>

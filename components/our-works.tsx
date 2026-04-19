@@ -53,7 +53,7 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
             sizes="(max-width: 768px) 100vw, 60vw"
           />
-          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors" />
+
         </div>
 
         {/* Project Info */}
@@ -79,7 +79,7 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#1a1a00] text-[#d4d44b]"
+                className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[white] text-[#d4d44b]"
               >
                 {tag}
               </span>
@@ -166,7 +166,7 @@ export function OurWorks() {
       className="relative w-full"
       style={{ height: `${projects.length * 200}vh` }}
     >
-      <div className="sticky top-0 h-screen w-full bg-[#f5f5dc] overflow-hidden">
+      <div className="sticky top-0 h-screen w-full bg-white overflow-hidden">
         {/* Grain overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"

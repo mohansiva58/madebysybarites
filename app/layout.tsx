@@ -7,6 +7,7 @@ import "./globals.css"
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  weight: ["300", "400", "500", "600"],
 })
 
 const geistMono = Geist_Mono({
@@ -26,7 +27,15 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/image.png",
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+    other: [
+      {
+        rel: "icon",
+        url: "/favicon.png",
+        type: "image/png",
+      },
+    ],
   },
   generator: 'v0.app'
 }
@@ -44,6 +53,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+      </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
         {children}
         <Analytics />

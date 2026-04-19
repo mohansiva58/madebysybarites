@@ -57,8 +57,13 @@ export function ChallengesSection() {
   }, [])
 
   return (
-    <section className="relative py-24 bg-[#f8fafc] overflow-hidden border-t border-b border-gray-200/50">
-      <div className="mx-auto max-w-[1400px] px-4 md:px-8">
+    <section className="relative py-24 bg-gradient-to-b from-blue-100/30 to-white overflow-hidden border-t border-b border-blue-100/20">
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
+      </div>
+      <div className="relative z-10">
 
         {/* Top Testimonial Card */}
         <div className="flex justify-center mb-16">

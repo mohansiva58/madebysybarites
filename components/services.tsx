@@ -71,8 +71,15 @@ const services: Product[] = [
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative bg-[#dec39e]">
-      <div className="pt-24 pb-8 max-w-7xl mx-auto px-6 text-center">
+    <section id="services" className="relative bg-gradient-to-b from-blue-100/40 to-white overflow-hidden">
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl -mr-32 -mt-32"></div>
+        <div className="absolute bottom-20 left-10 w-80 h-80 bg-gradient-to-tr from-purple-300/35 via-blue-200/30 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-br from-pink-300/35 to-transparent rounded-full blur-2xl"></div>
+      </div>
+
+      <div className="relative pt-24 pb-8 max-w-7xl mx-auto px-6 text-center z-10">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111] tracking-tight">
           What We Build
         </h2>

@@ -48,8 +48,13 @@ export function HowToGetStarted() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="py-20 bg-[#f0f0f0] relative overflow-hidden">
-            <div className="mx-auto max-w-6xl px-6">
+        <section ref={sectionRef} className="py-20 bg-gradient-to-b from-blue-100/35 to-white relative overflow-hidden">
+          {/* Abstract Background Elements */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
+          </div>
+          <div className="relative z-10">
                 {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <h2
@@ -135,6 +140,7 @@ export function HowToGetStarted() {
                     </div>
                 </div>
             </div>
+          </div>
         </section>
     )
 }

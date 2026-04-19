@@ -38,10 +38,16 @@ export function LogoCarousel() {
   }, [])
 
   return (
-    <section className="py-8 border-y border-border/30 bg-[#fcfcfc] overflow-hidden">
+    <section className="py-8 border-y border-blue-100/30 bg-gradient-to-r from-blue-50/30 to-white overflow-hidden relative">
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-70">
+        <div className="absolute -top-20 left-1/4 w-64 h-64 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-20 right-1/3 w-72 h-72 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
+      </div>
+      
       <div
         ref={scrollRef}
-        className="flex items-center gap-16 overflow-hidden whitespace-nowrap px-8"
+        className="flex items-center gap-16 overflow-hidden whitespace-nowrap px-8 relative z-10"
         style={{ scrollBehavior: "auto" }}
       >
         {[...logos, ...logos].map((logo, i) => (

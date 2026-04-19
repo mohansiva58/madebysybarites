@@ -38,8 +38,8 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 w-full pt-8 px-6 lg:px-12 bg-transparent lg:pointer-events-auto transition-all">
-        <div className="max-w-[1700px] mx-auto flex items-center justify-between relative">
+      <header className="absolute top-0 left-0 right-0 z-50 w-full pt-3 px-6 lg:px-12 transition-all">
+        <div className="w-full mx-auto flex items-center justify-between relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl px-4  shadow-lg">
           {/* Logo */}
           <Link
             href="/"
@@ -52,12 +52,12 @@ export function Header() {
           </Link>
 
           {/* Centered Navigation - Desktop */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 ml-[5%] bg-white/20 backdrop-blur-lg border border-white/60 shadow-md rounded-full px-8 py-3">
+          <nav className="hidden lg:flex items-center gap-8 xl:gap-12 ml-[5%]">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="flex items-center text-[13px] font-medium tracking-[0.05em] text-[#333] hover:text-[#000] transition-colors uppercase gap-1"
+                className="flex items-center text-[13px] font-medium tracking-[0.05em] text-white hover:text-gray-200 transition-colors uppercase gap-1"
               >
                 {item.label}
                 {item.label === "COLLECTION" && (
@@ -72,7 +72,7 @@ export function Header() {
           {/* Right Section - Desktop */}
           <div className="hidden lg:flex items-center gap-7">
             <Link href="https://wa.me/919701630276">
-              <button className="rounded-full bg-white text-[#111] hover:bg-gray-50 border border-transparent shadow-[0_4px_14px_rgba(0,0,0,0.06)] px-7 py-2.5 text-[13.5px] font-medium transition-transform hover:scale-105">
+              <button className="rounded-full bg-white/20 text-white hover:bg-white/30 border border-white/40 px-7 py-2.5 text-[13.5px] font-medium transition-all hover:scale-105 backdrop-blur-sm\">
                 Contact
               </button>
             </Link>
@@ -80,7 +80,7 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 text-[#111] hover:bg-black/5 rounded-full transition-colors relative z-50"
+            className="lg:hidden p-2 text-white hover:bg-white/20 rounded-full transition-colors relative z-50\"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >

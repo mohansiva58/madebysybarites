@@ -50,7 +50,15 @@ const FAQSection = () => {
   };
 
   return (
-    <div id="faqs" className="w-full min-h-screen bg-[#f5f5f5] py-20 px-6 md:px-24">
+    <div id="faqs" className="w-full min-h-screen bg-gradient-to-b from-blue-100/35 to-white py-20 px-6 md:px-24 relative overflow-hidden">
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-20 w-96 h-96 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
+      </div>
+
+      {/* Content Wrapper */}
+      <div className="relative z-10">
 
       {/* Heading */}
       <div className="text-center mb-16">
@@ -106,7 +114,7 @@ const FAQSection = () => {
                 className={`px-6 py-3 rounded-full text-left text-[17px] font-medium transition-all
                   ${openId === faq.id
                     ? "bg-black text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    : "bg-blue-50/40 text-gray-700 hover:bg-blue-100/40"
                   }
                 `}
               >
@@ -116,6 +124,7 @@ const FAQSection = () => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );

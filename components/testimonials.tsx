@@ -278,8 +278,14 @@ const testimonials: Testimonial[] = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="w-full py-24 px-4 bg-[#f8fafc] overflow-hidden">
-      <div className="container mx-auto max-w-6xl">
+    <section className="w-full py-24 px-4 bg-gradient-to-b from-blue-100/40 to-white overflow-hidden relative">
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="flex flex-col items-center mb-16">
           <span className="text-[#6cbcc4] font-medium mb-2 flex items-center gap-2 text-sm uppercase tracking-widest">
             ★ Client Stories
