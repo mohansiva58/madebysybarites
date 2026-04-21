@@ -252,28 +252,28 @@ const testimonials: Testimonial[] = [
       "Working with madebysybarites was an absolute pleasure. They rebranded our entire online presence — from logo to website — and the results exceeded every expectation. Our inquiries doubled within the first month.",
     name: "Venkat Atluri",
     designation: "Founder, Atluri Events",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
+    src: "https://picsum.photos/400/400?random=1",
   },
   {
     quote:
       "The team at madebysybarites delivered our e-commerce platform ahead of schedule with zero bugs at launch. Their attention to detail and communication throughout was top-notch. Truly a world-class team.",
     name: "Ravi Kumar",
     designation: "CEO, Akepatimart",
-    src: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&q=80",
+    src: "https://picsum.photos/400/400?random=2",
   },
   {
     quote:
       "We needed an app that felt premium and performed flawlessly. madebysybarites nailed it on the first try. The UI is stunning, and our users love the experience. Couldn't recommend them more.",
     name: "Priya Sharma",
     designation: "Co-Founder, Rofero",
-    src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
+    src: "https://picsum.photos/400/400?random=3",
   },
   {
     quote:
       "From day one, madebysybarites treated our project like their own. They translated our rough ideas into a beautiful, functional product — fast. The post-launch support has been incredible too.",
     name: "Arjun Mehta",
     designation: "Director, Wonderkids",
-    src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
+    src: "https://picsum.photos/400/400?random=4",
   },
 ]
 

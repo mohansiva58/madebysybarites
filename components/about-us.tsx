@@ -202,7 +202,7 @@ export default function AboutUsSection() {
                 whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80"
+                  src="https://picsum.photos/600/400?random=1"
                   alt="madebysybarites team"
                   className="w-full h-full object-cover"
                 />
