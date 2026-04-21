@@ -18,7 +18,7 @@ import {
   Sparkles,
   ShieldCheck,
 } from "lucide-react"
-import { motion, useScroll, useTransform, useInView, useSpring, type Variants } from "motion/react"
+import { motion, useScroll, useTransform, useInView, useSpring, type Variants } from "framer-motion"
 
 export default function AboutUsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)

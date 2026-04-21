@@ -8,7 +8,7 @@ import React, {
   useCallback,
 } from "react"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
-import { motion, AnimatePresence } from "motion/react"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface Testimonial {
   quote: string
