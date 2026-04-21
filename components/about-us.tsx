@@ -131,15 +131,11 @@ export default function AboutUsSection() {
       <div
         className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-slate-300/20 blur-3xl"
       />
-      <motion.div
-        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#6cbcc4]/40"
-        animate={{ y: [0, -15], opacity: [0.5, 1] }}
-        transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+      <div
+        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#6cbcc4]/40 animate-float-up"
       />
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-[#6cbcc4]/30"
-        animate={{ y: [0, 20], opacity: [0.5, 1] }}
-        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }}
+      <div
+        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-[#6cbcc4]/30 animate-float-down"
       />
 
       <motion.div
@@ -249,15 +245,11 @@ export default function AboutUsSection() {
                 style={{ y: y2 }}
               />
 
-              <motion.div
-                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#6cbcc4]"
-                animate={{ y: [0, -10], opacity: [0.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+              <div
+                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#6cbcc4] animate-float-small-up"
               />
-              <motion.div
-                className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#6cbcc4]/70"
-                animate={{ y: [0, 10], opacity: [0.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.5 }}
+              <div
+                className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#6cbcc4]/70 animate-float-small-down"
               />
             </motion.div>
           </div>

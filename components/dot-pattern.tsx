@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useEffect, useId, useRef, useState } from "react"
-import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -125,29 +124,18 @@ export function DotPattern({
         </radialGradient>
       </defs>
       {dots.map((dot, index) => (
-        <motion.circle
+        <circle
           key={`${dot.x}-${dot.y}`}
           cx={dot.x}
           cy={dot.y}
           r={cr}
           fill={glow ? `url(#${id}-gradient)` : "currentColor"}
-          initial={glow ? { opacity: 0.4, scale: 1 } : {}}
-          animate={
+          style={
             glow
               ? {
-                  opacity: [0.4, 1],
-                  scale: [1, 1.5],
-                }
-              : {}
-          }
-          transition={
-            glow
-              ? {
-                  duration: dot.duration,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                  delay: dot.delay,
-                  ease: "easeInOut",
+                  opacity: 0.4,
+                  animation: `glow-pulse ${dot.duration}s ease-in-out infinite`,
+                  animationDelay: `${dot.delay}s`,
                 }
               : {}
           }

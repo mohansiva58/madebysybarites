@@ -17,6 +17,58 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* CSS Animations - replacing framer-motion infinite repeats for React 19 compatibility */
+@keyframes float-up {
+  0% { transform: translateY(0px); opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-15px); opacity: 0.5; }
+}
+
+@keyframes float-down {
+  0% { transform: translateY(0px); opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { transform: translateY(20px); opacity: 0.5; }
+}
+
+@keyframes float-small-up {
+  0% { transform: translateY(0px); opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-10px); opacity: 0.5; }
+}
+
+@keyframes float-small-down {
+  0% { transform: translateY(0px); opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { transform: translateY(10px); opacity: 0.5; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+.animate-float-up {
+  animation: float-up 3s ease-in-out infinite;
+}
+
+.animate-float-down {
+  animation: float-down 4s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-float-small-up {
+  animation: float-small-up 2s ease-in-out infinite;
+}
+
+.animate-float-small-down {
+  animation: float-small-down 2s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
 :root {
   /* madebysybarites Color Palette */
   --cd-primary: #0958ff;
