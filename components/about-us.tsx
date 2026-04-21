@@ -18,23 +18,13 @@ import {
   Sparkles,
   ShieldCheck,
 } from "lucide-react"
-import { motion, useScroll, useTransform, useInView, useSpring, type Variants } from "framer-motion"
+import { motion, useInView, useSpring, type Variants } from "framer-motion"
 
 export default function AboutUsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const statsRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 })
   const isStatsInView = useInView(statsRef, { once: false, amount: 0.3 })
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  })
-
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -50])
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, 50])
-  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 20])
-  const rotate2 = useTransform(scrollYProgress, [0, 1], [0, -20])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -235,14 +225,12 @@ export default function AboutUsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.1, delay: 0.2 }}
-                style={{ y: y1 }}
               />
               <motion.div
                 className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-[#6cbcc4]/10"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.1, delay: 0.25 }}
-                style={{ y: y2 }}
               />
 
               <div
@@ -326,7 +314,7 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
       >
         <motion.div
           className="text-[#6cbcc4] bg-[#6cbcc4]/10 p-3 rounded-lg transition-colors duration-300 group-hover:bg-[#6cbcc4]/20 relative"
-          whileHover={{ rotate: [0, 10], transition: { duration: 0.5, repeatType: "reverse", repeat: 1 } }}
+          whileHover={{ rotate: 8, transition: { duration: 0.2 } }}
         >
           {icon}
           {secondaryIcon}

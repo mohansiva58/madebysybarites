@@ -1,9 +1,7 @@
 "use client"
 
-import { useRef } from "react"
 import Image from "next/image"
 import { Github, ArrowUpRight } from "lucide-react"
-import { motion, useScroll, useTransform } from "framer-motion"
 
 const grain = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`
 
@@ -114,59 +112,10 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
   )
 }
 
-function ProjectScrollDot({
-  index,
-  scrollYProgress,
-  containerRef,
-}: {
-  index: number
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"]
-  containerRef: React.RefObject<HTMLElement | null>
-}) {
-  const activePoint = index / (projects.length - 1)
-  const opacity = useTransform(
-    scrollYProgress,
-    [activePoint - 0.1, activePoint, activePoint + 0.1],
-    [0.2, 1, 0.2],
-  )
-
-  const handleClick = () => {
-    if (containerRef.current) {
-      const containerTop = containerRef.current.offsetTop
-      const totalHeight = containerRef.current.offsetHeight
-      const viewportHeight = window.innerHeight
-      const targetScroll = containerTop + activePoint * (totalHeight - viewportHeight)
-      window.scrollTo({ top: targetScroll, behavior: "smooth" })
-    }
-  }
-
-  return (
-    <motion.div
-      onClick={handleClick}
-      style={{ opacity }}
-      className="w-10 h-1.5 bg-[#1a1a00] rounded-full cursor-pointer hover:bg-[#d4d44b] transition-colors"
-    />
-  )
-}
-
 export function OurWorks() {
-  const containerRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  })
-
-  const endX = `-${(projects.length - 1) * 100}vw`
-  const x = useTransform(scrollYProgress, [0, 1], ["0vw", endX])
-
   return (
-    <section
-      ref={containerRef}
-      id="our-works"
-      className="relative w-full"
-      style={{ height: `${projects.length * 200}vh` }}
-    >
-      <div className="sticky top-0 h-screen w-full bg-white overflow-hidden">
+    <section id="our-works" className="relative w-full bg-white py-16 overflow-hidden">
+      <div className="w-full">
         {/* Grain overlay */}
         <div
           className="absolute inset-0 pointer-events-none z-0"
@@ -188,44 +137,18 @@ export function OurWorks() {
           </span>
         </div>
 
-        {/* Horizontal scroll track */}
-        <motion.div
-          layout={false}
-          style={{
-            x,
-            display: "flex",
-            height: "100%",
-            width: `${projects.length * 100}vw`,
-          }}
-        >
-          {projects.map((project, index) => (
-            <ProjectItem key={index} project={project} index={index} />
-          ))}
-        </motion.div>
-
-        {/* Bottom nav */}
-        <div className="absolute bottom-10 left-10 right-10 z-30 flex items-end justify-between">
-          <div className="flex flex-col gap-2">
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400">
-              Project Index
-            </span>
-            <div className="flex gap-2">
-              {projects.map((_, i) => (
-                <ProjectScrollDot
-                  key={i}
-                  index={i}
-                  scrollYProgress={scrollYProgress}
-                  containerRef={containerRef}
-                />
-              ))}
-            </div>
+        {/* Horizontal scroll track (CSS-driven for runtime stability) */}
+        <div className="relative z-10 overflow-x-auto snap-x snap-mandatory scrollbar-thin scrollbar-thumb-[#d4d44b]/40 scrollbar-track-transparent">
+          <div className="flex min-h-[80vh] w-max">
+            {projects.map((project, index) => (
+              <ProjectItem key={index} project={project} index={index} />
+            ))}
           </div>
+        </div>
 
-          <motion.button
+        <div className="relative z-20 mt-10 flex justify-center">
+          <button
             onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
             className="group flex items-center gap-3 px-8 py-4 rounded-full bg-[#1a1a00] text-[#f5f5dc] border border-[#d4d44b]/20 transition-all hover:bg-black"
           >
             <div className="flex flex-col items-end">
@@ -235,7 +158,7 @@ export function OurWorks() {
             <div className="w-8 h-8 rounded-full bg-[#d4d44b] flex items-center justify-center text-[#1a1a00] group-hover:rotate-45 transition-transform">
               <ArrowUpRight size={18} />
             </div>
-          </motion.button>
+          </button>
         </div>
       </div>
     </section>

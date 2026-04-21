@@ -166,6 +166,23 @@ export function CircularTestimonials({
 
   return (
     <div className="w-full max-w-4xl px-8 py-8 mx-auto">
+      <style>{`
+        @keyframes word-fade-up {
+          from {
+            opacity: 0;
+            transform: translateY(5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .word-fade-up {
+          display: inline-block;
+          opacity: 0;
+          animation: word-fade-up 220ms ease-in-out forwards;
+        }
+      `}</style>
       <div className="grid gap-20 md:grid-cols-2">
         {/* Images */}
         <div
@@ -204,15 +221,13 @@ export function CircularTestimonials({
               </p>
               <motion.p className="leading-7" style={{ color: colorTestimony, fontSize: fontSizeQuote }}>
                 {activeTestimonial.quote.split(" ").map((word, i) => (
-                  <motion.span
+                  <span
                     key={i}
-                    initial={{ filter: "blur(10px)", opacity: 0, y: 5 }}
-                    animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: "easeInOut", delay: 0.025 * i }}
-                    style={{ display: "inline-block" }}
+                    className="word-fade-up"
+                    style={{ animationDelay: `${0.025 * i}s` }}
                   >
                     {word}&nbsp;
-                  </motion.span>
+                  </span>
                 ))}
               </motion.p>
             </motion.div>
