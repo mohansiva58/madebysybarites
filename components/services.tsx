@@ -64,7 +64,7 @@ const services: Product[] = [
     id: "9",
     title: "Digital Marketing ",
     price: "Growth Metrics",
-    prodImg: "https://picsum.photos/800/600?random=13",,
+    prodImg: "https://picsum.photos/800/600?random=13",
     modelImg: "/services/digital-marketing.png"
   }
 ];
