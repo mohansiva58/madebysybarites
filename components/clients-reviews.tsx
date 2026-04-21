@@ -135,6 +135,7 @@ export function ClientsReviews() {
       <div className="relative z-10 h-full flex flex-col items-center justify-center min-h-screen">
         {/* Center Content */}
         <motion.div
+          layout={false}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -160,6 +161,7 @@ export function ClientsReviews() {
             return (
               <motion.div
                 key={review.id}
+                layout={false}
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: position.delay, duration: 0.5 }}
@@ -174,6 +176,7 @@ export function ClientsReviews() {
                 <div className="relative group cursor-pointer">
                   {/* Profile Image with Glow */}
                   <motion.div
+                    layout={false}
                     animate={{
                       scale: isHovered ? 1.15 : 1,
                     }}

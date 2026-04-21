@@ -188,6 +188,7 @@ export function CircularTestimonials({
         <div className="flex flex-col justify-between">
           <AnimatePresence mode="wait">
             <motion.div
+              layout={false}
               key={activeIndex}
               variants={quoteVariants}
               initial="initial"
