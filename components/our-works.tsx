@@ -190,6 +190,7 @@ export function OurWorks() {
 
         {/* Horizontal scroll track */}
         <motion.div
+          layout={false}
           style={{
             x,
             display: "flex",

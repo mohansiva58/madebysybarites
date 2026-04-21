@@ -125,13 +125,11 @@ export default function AboutUsSection() {
       </div>
       {/* Decorative background blobs */}
       <div className="relative z-10">
-      <motion.div
+      <div
         className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[#6cbcc4]/10 blur-3xl"
-        style={{ y: y1, rotate: rotate1 }}
       />
-      <motion.div
+      <div
         className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-slate-300/20 blur-3xl"
-        style={{ y: y2, rotate: rotate2 }}
       />
       <motion.div
         className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#6cbcc4]/40"
@@ -145,14 +143,16 @@ export default function AboutUsSection() {
       />
 
       <motion.div
+        layout={false}
         className="container mx-auto max-w-6xl relative z-10"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={containerVariants}
       >
         {/* Header */}
-        <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
+        <motion.div layout={false} className="flex flex-col items-center mb-6" variants={itemVariants}>
           <motion.span
+            layout={false}
             className="text-[#6cbcc4] font-medium mb-2 flex items-center gap-2"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}

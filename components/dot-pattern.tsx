@@ -135,8 +135,8 @@ export function DotPattern({
           animate={
             glow
               ? {
-                  opacity: [0.4, 1, 0.4],
-                  scale: [1, 1.5, 1],
+                  opacity: [0.4, 1],
+                  scale: [1, 1.5],
                 }
               : {}
           }
@@ -145,7 +145,7 @@ export function DotPattern({
               ? {
                   duration: dot.duration,
                   repeat: Infinity,
-                  repeatType: "reverse",
+                  repeatType: "loop",
                   delay: dot.delay,
                   ease: "easeInOut",
                 }
