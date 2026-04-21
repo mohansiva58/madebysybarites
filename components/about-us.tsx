@@ -133,13 +133,13 @@ export default function AboutUsSection() {
       />
       <motion.div
         className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#6cbcc4]/40"
-        animate={{ y: [0, -15, 0], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ y: [0, -15], opacity: [0.5, 1] }}
+        transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
       />
       <motion.div
         className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-[#6cbcc4]/30"
-        animate={{ y: [0, 20, 0], opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        animate={{ y: [0, 20], opacity: [0.5, 1] }}
+        transition={{ duration: 4, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 1 }}
       />
 
       <motion.div
@@ -251,13 +251,13 @@ export default function AboutUsSection() {
 
               <motion.div
                 className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#6cbcc4]"
-                animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: [0, -10], opacity: [0.5, 1] }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
               />
               <motion.div
                 className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#6cbcc4]/70"
-                animate={{ y: [0, 10, 0], opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                animate={{ y: [0, 10], opacity: [0.5, 1] }}
+                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.5 }}
               />
             </motion.div>
           </div>
@@ -334,7 +334,7 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
       >
         <motion.div
           className="text-[#6cbcc4] bg-[#6cbcc4]/10 p-3 rounded-lg transition-colors duration-300 group-hover:bg-[#6cbcc4]/20 relative"
-          whileHover={{ rotate: [0, -10, 10, -5, 0], transition: { duration: 0.5 } }}
+          whileHover={{ rotate: [0, 10], transition: { duration: 0.5, repeatType: "reverse", repeat: 1 } }}
         >
           {icon}
           {secondaryIcon}
