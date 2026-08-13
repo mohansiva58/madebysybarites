@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Syne, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+import { SmoothScroll } from "@/components/smooth-scroll"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,7 +56,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#050505",
+  themeColor: "#ffffff",
 }
 
 export default function RootLayout({
@@ -64,12 +65,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${syne.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${syne.variable} ${geistMono.variable} bg-background`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="font-sans antialiased bg-[#050505] text-[#e4e4e7]" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-foreground" suppressHydrationWarning>
+        <SmoothScroll />
         {children}
         <Analytics />
       </body>
