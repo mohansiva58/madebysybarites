@@ -9,6 +9,7 @@ const clients = [
   { name: "Wonderkids", logo: "/works/logo4.png" },
   { name: "ROFERO", logo: "/works/logo1.png" },
   { name: "SaaS King", logo: "/works/logo2.png" },
+  { name: "Leena by Alekhya", logo: "/works/leena-by-alekhya-logo.png" },
   { name: "TFS Finserv", logo: "/works/logo3.png" },
   { name: "Atluri Events", logo: "/works/logo4.png" },
 ]

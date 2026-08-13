@@ -94,7 +94,7 @@ export function CTAFooter() {
             <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
               <button
                 onClick={handleBookCall}
-                className="group relative rounded-full bg-black px-10 py-4 text-[15px] font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-black/85"
+                className="group relative rounded-full bg-white px-10 py-4 text-[15px] font-semibold text-black transition-all duration-300 hover:scale-105 hover:bg-white/85"
               >
 
                 <span className="relative flex items-center gap-2">

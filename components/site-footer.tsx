@@ -94,7 +94,7 @@ export function SiteFooter() {
               </div>
               <button 
                 type="submit"
-                className="rounded-lg bg-black px-4 py-3.5 text-[14px] font-semibold text-white transition-opacity hover:opacity-80 whitespace-nowrap"
+                className="rounded-lg bg-white px-4 py-3.5 text-[14px] font-semibold text-black shadow-sm transition-opacity hover:opacity-80 whitespace-nowrap"
               >
                 Subscribe
               </button>
