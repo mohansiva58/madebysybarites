@@ -94,21 +94,23 @@ export function CTAFooter() {
             <div className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center">
               <button
                 onClick={handleBookCall}
-                className="group relative px-10 py-4 rounded-full text-[15px] font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(139,92,246,0.3)]"
+                className="group relative rounded-full bg-black px-10 py-4 text-[15px] font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-black/85"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-cyan-500 rounded-full" />
-                <span className="absolute inset-0 bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                 <span className="relative flex items-center gap-2">
                   Book a Free Consultation
                   <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </span>
               </button>
 
-              <a href="mailto:hello@sybarites.dev">
-                <button className="px-10 py-4 rounded-full text-[15px] font-medium text-zinc-300 border border-white/10 hover:border-white/20 hover:bg-white/[0.03] transition-all duration-300 hover:scale-105 flex items-center gap-2">
-                  <Mail size={16} />
-                  Send a Message
-                </button>
+              <a
+                href="https://wa.me/919701630276?text=Hi%20Sybarites%2C%20I%20have%20a%20project%20in%20mind."
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 rounded-full border border-white/15 px-10 py-4 text-[15px] font-medium text-zinc-300 transition-all duration-300 hover:scale-105 hover:border-white/30 hover:bg-white/[0.04]"
+              >
+                <Mail size={16} />
+                Send a Message
               </a>
             </div>
           </motion.div>

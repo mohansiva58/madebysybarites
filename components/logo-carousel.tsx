@@ -18,7 +18,7 @@ export function LogoCarousel() {
   const doubledClients = [...clients, ...clients]
 
   return (
-    <section className="relative py-16 bg-[#050505] overflow-hidden">
+    <section id="clients" className="relative overflow-hidden border-y border-border bg-secondary/30 py-14">
       {/* Top border glow */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
 
@@ -31,15 +31,15 @@ export function LogoCarousel() {
         className="text-center mb-10"
       >
         <p className="text-[12px] font-medium tracking-[0.15em] uppercase text-zinc-500">
-          Trusted by innovative brands
+          Brand clients & collaborators
         </p>
       </motion.div>
 
       {/* Marquee */}
       <div className="relative">
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-secondary/30 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-secondary/30 to-transparent pointer-events-none" />
 
         {/* Scrolling track */}
         <div className="flex items-center animate-marquee hover:[animation-play-state:paused]">
