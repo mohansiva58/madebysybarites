@@ -1,84 +1,67 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { motion } from "framer-motion"
 
-const logos = [
-  { type: "icon", content: "AtluriEvents" },
-  { type: "text", content: "Rofero", style: "italic" },
-  { type: "text", content: "Brandverse", icon: true },
-  { type: "text", content: "WonderKids" },
-  { type: "text", content: "Asvix", bold: true },
-  { type: "icon", content: "AtluriEvents" },
-  { type: "text", content: "Rofero", style: "italic" },
-  { type: "text", content: "Brandverse", icon: true },
-  { type: "text", content: "Shewear", icon: true },
+const clients = [
+  { name: "TFS Finserv", logo: "/works/logo1.png" },
+  { name: "Atluri Events", logo: "/works/logo2.png" },
+  { name: "Akepatimart", logo: "/works/logo3.png" },
+  { name: "Wonderkids", logo: "/works/logo4.png" },
+  { name: "ROFERO", logo: "/works/logo1.png" },
+  { name: "SaaS King", logo: "/works/logo2.png" },
+  { name: "TFS Finserv", logo: "/works/logo3.png" },
+  { name: "Atluri Events", logo: "/works/logo4.png" },
 ]
 
 export function LogoCarousel() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current
-    if (!scrollContainer) return
-
-    let animationId: number
-    let position = 0
-
-    const scroll = () => {
-      position += 0.4
-      if (position >= scrollContainer.scrollWidth / 2) {
-        position = 0
-      }
-      scrollContainer.scrollLeft = position
-      animationId = requestAnimationFrame(scroll)
-    }
-
-    animationId = requestAnimationFrame(scroll)
-    return () => cancelAnimationFrame(animationId)
-  }, [])
+  // Double the array for seamless loop
+  const doubledClients = [...clients, ...clients]
 
   return (
-    <section className="py-8 border-y border-blue-100/30 bg-gradient-to-r from-blue-50/30 to-white overflow-hidden relative">
-      {/* Abstract Background Elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-70">
-        <div className="absolute -top-20 left-1/4 w-64 h-64 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-20 right-1/3 w-72 h-72 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
-      </div>
-      
-      <div
-        ref={scrollRef}
-        className="flex items-center gap-16 overflow-hidden whitespace-nowrap px-8 relative z-10"
-        style={{ scrollBehavior: "auto" }}
+    <section className="relative py-16 bg-[#050505] overflow-hidden">
+      {/* Top border glow */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
+
+      {/* Label */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-10"
       >
-        {[...logos, ...logos].map((logo, i) => (
-          <div
-            key={i}
-            className="flex items-center gap-2 shrink-0 text-muted-foreground/50 font-medium text-lg tracking-wide"
-          >
-            {logo.type === "icon" && logo.content === "crown" && (
-              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z" />
-              </svg>
-            )}
-            {logo.type === "icon" && logo.content !== "crown" && (
-              <span className="font-semibold">{logo.content}</span>
-            )}
-            {logo.type === "text" && (
-              <span className={`${logo.style === "italic" ? "italic" : ""} ${logo.bold ? "font-bold" : ""}`}>
-                {logo.icon && (
-                  <svg className="w-5 h-5 inline-block mr-1" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                  </svg>
-                )}
-                {logo.content}
-              </span>
-            )}
-          </div>
-        ))}
+        <p className="text-[12px] font-medium tracking-[0.15em] uppercase text-zinc-500">
+          Trusted by innovative brands
+        </p>
+      </motion.div>
+
+      {/* Marquee */}
+      <div className="relative">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050505] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050505] to-transparent z-10 pointer-events-none" />
+
+        {/* Scrolling track */}
+        <div className="flex items-center animate-marquee hover:[animation-play-state:paused]">
+          {doubledClients.map((client, i) => (
+            <div
+              key={`${client.name}-${i}`}
+              className="flex-shrink-0 mx-10 md:mx-16 group"
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="h-10 md:h-12 w-auto object-contain opacity-30 grayscale hover:opacity-70 hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* Bottom border glow */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
     </section>
   )
 }
 
-export const Case1 = LogoCarousel;
-export const AnimatedCarousel = LogoCarousel;
+export { LogoCarousel as Case1 }

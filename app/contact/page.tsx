@@ -99,7 +99,7 @@ const ContactPage: React.FC = () => {
 
             <div className="pt-6 space-y-3">
               <a
-                href="#"
+                href="https://www.instagram.com/sybarites.tech/"
                 className="flex items-center space-x-2 text-black hover:opacity-70 transition"
               >
                 <span className="text-lg">↗</span>
@@ -107,7 +107,7 @@ const ContactPage: React.FC = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.linkedin.com/company/madebysybarites/"
                 className="flex items-center space-x-2 text-black hover:opacity-70 transition"
               >
                 <span className="text-lg">↗</span>

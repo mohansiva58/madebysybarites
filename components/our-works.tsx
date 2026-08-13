@@ -1,98 +1,165 @@
 "use client"
 
+import { useRef } from "react"
 import Image from "next/image"
-import { Github, ArrowUpRight } from "lucide-react"
-
-const grain = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`
+import { motion, useScroll, useTransform } from "framer-motion"
+import { ArrowUpRight, Github } from "lucide-react"
 
 const projects = [
   {
-    title: "ROFERO – Clothing Brand Website",
-    description: "Premium clothing brand website with modern UI/UX, smooth animations, and immersive product showcases.",
+    title: "ROFERO",
+    subtitle: "Clothing Brand",
+    description: "Premium clothing brand website with modern UI/UX, smooth animations, and immersive product showcases. Built for conversion and brand elevation.",
     image: "/works/project1.png",
-    tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript", "Node.js"],
+    tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
     live: "https://clothingbrand-nu.vercel.app/",
     github: "https://github.com/mohansiva58/Rofero",
+    color: "#8B5CF6",
   },
   {
-    title: "Atluri Events – Event Planner",
-    description: "Visually captivating event management website with service sections, galleries, and testimonials.",
+    title: "Atluri Events",
+    subtitle: "Event Management",
+    description: "Visually captivating event management platform with service sections, photo galleries, and testimonials. Designed to inspire and convert.",
     image: "/works/project2.png",
-    tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript", "Node.js"],
+    tags: ["React", "Tailwind CSS", "Framer Motion", "Node.js"],
     live: "https://atlurievents.in/",
     github: "https://github.com/mohansiva58/attuluri-events",
+    color: "#06B6D4",
   },
   {
-    title: "Akepatimart – E-Commerce",
-    description: "Full-featured online marketplace with product listings, cart functionality, and seamless shopping experience.",
+    title: "Akepatimart",
+    subtitle: "E-Commerce Platform",
+    description: "Full-featured online marketplace with product listings, cart functionality, and seamless shopping experience built for scale.",
     image: "/works/project3.png",
     tags: ["React", "Tailwind CSS", "TypeScript", "Node.js"],
     live: "https://akepatimart.com/",
+    color: "#10B981",
   },
   {
-    title: "Wonderkids – Learning Platform",
-    description: "Engaging and colorful interactive platform for kids featuring activities and learning modules.",
+    title: "Wonderkids",
+    subtitle: "Learning Platform",
+    description: "Engaging and colorful interactive education platform for children featuring activities, games, and learning modules.",
     image: "/works/project4.png",
     tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
     live: "https://wonderkids.great-site.net/?i=1",
+    color: "#F59E0B",
   },
 ]
 
-function ProjectItem({ project, index }: { project: typeof projects[0]; index: number }) {
-  return (
-    <div className="w-screen h-screen flex-shrink-0 flex items-center justify-center p-8 md:p-20 relative overflow-hidden">
-      <div className="relative group max-w-6xl w-full flex flex-col md:flex-row gap-12 items-center z-10">
-        {/* Project Image */}
-        <div className="w-full md:w-3/5 aspect-[16/10] rounded-3xl overflow-hidden shadow-2xl relative bg-white/5 backdrop-blur-sm">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            sizes="(max-width: 768px) 100vw, 60vw"
-          />
+function ProjectCard({ project, index }: { project: typeof projects[0]; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "center center"],
+  })
 
+  const y = useTransform(scrollYProgress, [0, 1], [80, 0])
+  const cardOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.1, 1])
+
+  const isEven = index % 2 === 0
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ opacity: cardOpacity, y }}
+      className="group"
+    >
+      <div className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 lg:gap-14 items-center`}>
+        {/* Image */}
+        <div className="w-full lg:w-3/5 relative">
+          <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#0a0a0a] border border-white/[0.04]">
+            <motion.div style={{ scale: imageScale }} className="absolute inset-0">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                className="object-cover transition-all duration-700 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 60vw"
+              />
+            </motion.div>
+
+            {/* Overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            {/* Hover CTA */}
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+              {project.live && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black text-[13px] font-semibold hover:scale-105 transition-transform"
+                >
+                  Visit Site <ArrowUpRight size={14} />
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors"
+                >
+                  <Github size={18} />
+                </a>
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* Project Info */}
-        <div className="w-full md:w-2/5 text-left space-y-6">
-          <div className="space-y-2">
-            <span className="text-xs font-black tracking-widest uppercase text-gray-500">
-              / EXHIBIT {index + 1}
+        {/* Info */}
+        <div className="w-full lg:w-2/5 space-y-5">
+          {/* Index */}
+          <div className="flex items-center gap-3">
+            <span
+              className="text-[11px] font-bold tracking-[0.15em] uppercase"
+              style={{ color: project.color }}
+            >
+              Project {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="text-4xl md:text-6xl font-black uppercase leading-[1] text-[#1a1a00]" style={{ letterSpacing: "-0.03em" }}>
-              {project.title.split(" – ")[0]}
-              <br />
-              <span className="italic font-medium" style={{ WebkitTextStroke: "1.5px #1a1a00", color: "transparent" }}>
-                {project.title.split(" – ")[1] || ""}
-              </span>
-            </h3>
+            <div className="flex-1 h-px bg-white/[0.06]" />
           </div>
 
-          <p className="text-gray-700 text-lg leading-relaxed font-normal max-w-md">
+          {/* Title */}
+          <h3
+            className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-[-0.03em] text-white"
+            style={{ fontFamily: "var(--font-syne)" }}
+          >
+            {project.title}
+          </h3>
+
+          <p className="text-[13px] font-medium tracking-[0.05em] uppercase text-zinc-500">
+            {project.subtitle}
+          </p>
+
+          <p className="text-[15px] text-zinc-400 leading-relaxed">
             {project.description}
           </p>
 
-          <div className="flex flex-wrap gap-2">
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 pt-2">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[white] text-[#d4d44b]"
+                className="px-3 py-1.5 rounded-full text-[11px] font-medium tracking-[0.02em] bg-white/[0.04] text-zinc-400 border border-white/[0.06]"
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          <div className="flex gap-4 pt-4">
+          {/* Links */}
+          <div className="flex gap-3 pt-4">
             {project.live && (
               <a
                 href={project.live}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#1a1a00] text-[#f5f5dc] font-bold text-xs uppercase tracking-widest transition-all hover:scale-105"
+                className="group/btn flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-semibold text-white bg-white/[0.06] border border-white/[0.08] hover:bg-white/[0.1] hover:border-white/[0.15] transition-all duration-300"
               >
-                <ArrowUpRight size={16} /> Live View
+                <ArrowUpRight size={15} className="transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                View Live
               </a>
             )}
             {project.github && (
@@ -100,68 +167,56 @@ function ProjectItem({ project, index }: { project: typeof projects[0]; index: n
                 href={project.github}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-full border-2 border-gray-800 text-gray-800 font-bold text-xs uppercase tracking-widest transition-all hover:bg-gray-800 hover:text-[#f5f5dc]"
+                className="flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-semibold text-zinc-400 border border-white/[0.06] hover:text-white hover:border-white/[0.12] transition-all duration-300"
               >
-                <Github size={16} /> Source
+                <Github size={15} />
+                Source
               </a>
             )}
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
 export function OurWorks() {
   return (
-    <section id="our-works" className="relative w-full bg-white py-16 overflow-hidden">
-      <div className="w-full">
-        {/* Grain overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{ backgroundImage: grain, backgroundSize: "200px 200px" }}
-        />
+    <section id="projects" className="relative py-28 md:py-36 bg-[#050505] overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-violet-600/5 blur-[150px] pointer-events-none" />
 
-        {/* Watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0">
-          <span
-            className="font-black uppercase"
-            style={{
-              fontSize: "25vw",
-              letterSpacing: "-0.04em",
-              color: "rgba(26,26,0,0.03)",
-              lineHeight: 1,
-            }}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20"
+        >
+          <p className="text-[12px] font-medium tracking-[0.15em] uppercase text-cyan-400 mb-4">
+            Our Portfolio
+          </p>
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-white"
+            style={{ fontFamily: "var(--font-syne)" }}
           >
-            WORKS
-          </span>
-        </div>
+            Selected{" "}
+            <span className="text-gradient">Works</span>
+          </h2>
+          <p className="mt-6 text-lg text-zinc-400 max-w-2xl mx-auto">
+            A curated showcase of projects that demonstrate our commitment to excellence and innovation.
+          </p>
+        </motion.div>
 
-        {/* Horizontal scroll track (CSS-driven for runtime stability) */}
-        <div className="relative z-10 overflow-x-auto snap-x snap-mandatory scrollbar-thin scrollbar-thumb-[#d4d44b]/40 scrollbar-track-transparent">
-          <div className="flex min-h-[80vh] w-max">
-            {projects.map((project, index) => (
-              <ProjectItem key={index} project={project} index={index} />
-            ))}
-          </div>
-        </div>
-
-        <div className="relative z-20 mt-10 flex justify-center">
-          <button
-            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="group flex items-center gap-3 px-8 py-4 rounded-full bg-[#1a1a00] text-[#f5f5dc] border border-[#d4d44b]/20 transition-all hover:bg-black"
-          >
-            <div className="flex flex-col items-end">
-              <span className="text-[10px] font-black leading-none uppercase tracking-widest text-[#d4d44b]/60">Navigate</span>
-              <span className="text-xs font-black uppercase tracking-widest">Skip Section</span>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-[#d4d44b] flex items-center justify-center text-[#1a1a00] group-hover:rotate-45 transition-transform">
-              <ArrowUpRight size={18} />
-            </div>
-          </button>
+        {/* Projects */}
+        <div className="space-y-24 md:space-y-32">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.title} project={project} index={i} />
+          ))}
         </div>
       </div>
     </section>
   )
 }
-

@@ -1,13 +1,19 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, Geist_Mono } from "next/font/google"
+import { Inter, Syne, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
+})
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800"],
 })
 
 const geistMono = Geist_Mono({
@@ -16,15 +22,21 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Sybarites | World-class Tech Partner",
+  title: "Sybarites | Premium Digital Agency & Software Solutions",
   description:
-    "Trusted by startups and enterprises to design, build, and scale products that perform globally. Engineering your digital success.",
-  keywords: ["web development", "mobile apps", "UI/UX design", "AI solutions", "tech partner", "software development"],
-  authors: [{ name: "madebysybarites" }],
+    "We design, build, and scale world-class digital products. From stunning websites to AI-powered applications — Sybarites is your trusted tech partner for premium software solutions.",
+  keywords: ["digital agency", "software solutions", "web development", "mobile apps", "UI/UX design", "AI solutions", "tech partner", "premium software", "Sybarites"],
+  authors: [{ name: "Sybarites" }],
   openGraph: {
-    title: "madebysybarites | World-class Tech Partner",
-    description: "Trusted by startups and enterprises to design, build, and scale products that perform globally.",
+    title: "Sybarites | Premium Digital Agency & Software Solutions",
+    description: "We design, build, and scale world-class digital products. Your trusted tech partner for premium software solutions.",
     type: "website",
+    siteName: "Sybarites",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sybarites | Premium Digital Agency",
+    description: "We design, build, and scale world-class digital products.",
   },
   icons: {
     icon: "/favicon.ico",
@@ -43,7 +55,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0958FF",
+  themeColor: "#050505",
 }
 
 export default function RootLayout({
@@ -52,13 +64,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${syne.variable} ${geistMono.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-sans antialiased" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-[#050505] text-[#e4e4e7]" suppressHydrationWarning>
         {children}
         <Analytics />
       </body>

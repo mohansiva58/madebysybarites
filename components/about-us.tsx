@@ -1,313 +1,145 @@
 "use client"
 
-import type React from "react"
-import { useRef } from "react"
-import {
-  Code2,
-  Search,
-  Palette,
-  Rocket,
-  TrendingUp,
-  Zap,
-  ArrowRight,
-  Star,
-  CheckCircle,
-  Sparkles,
-  ShieldCheck,
-} from "lucide-react"
-import { motion, useInView, type Variants } from "framer-motion"
+import { useEffect, useRef, useState } from "react"
+import { motion, useInView } from "framer-motion"
+import { Code2, Palette, Rocket, Users } from "lucide-react"
 
-export default function AboutUsSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(sectionRef, { once: false, amount: 0.1 })
+const stats = [
+  { icon: Rocket, value: 50, suffix: "+", label: "Projects Launched", color: "text-violet-400" },
+  { icon: Users, value: 30, suffix: "+", label: "Happy Clients", color: "text-cyan-400" },
+  { icon: Code2, value: 15, suffix: "+", label: "Technologies", color: "text-emerald-400" },
+  { icon: Palette, value: 100, suffix: "%", label: "Client Retention", color: "text-amber-400" },
+]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
-    },
-  }
+function AnimatedCounter({ value, suffix, inView }: { value: number; suffix: string; inView: boolean }) {
+  const [count, setCount] = useState(0)
 
-  const itemVariants: Variants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" as const },
-    },
-  }
-
-  const services = [
-    {
-      icon: <Search className="w-6 h-6" />,
-      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
-      title: "01 — Discovery",
-      description:
-        "We start by deeply understanding your goals, target audience, and requirements — laying a clear, shared foundation before a single line of code is written.",
-      position: "left",
-    },
-    {
-      icon: <Palette className="w-6 h-6" />,
-      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
-      title: "02 — Design",
-      description:
-        "From wireframes to high-fidelity mockups, we craft intuitive UI/UX that aligns with your brand identity and creates experiences users genuinely love.",
-      position: "left",
-    },
-    {
-      icon: <Code2 className="w-6 h-6" />,
-      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
-      title: "03 — Development",
-      description:
-        "Clean, scalable code built with the right stack for your product. We turn approved designs into fully functional, high-performance digital products.",
-      position: "left",
-    },
-    {
-      icon: <ShieldCheck className="w-6 h-6" />,
-      secondaryIcon: <Sparkles className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
-      title: "04 — Testing & QA",
-      description:
-        "Rigorous testing across devices, browsers, and edge cases ensures your product is bug-free, secure, and ready to handle the real world with confidence.",
-      position: "right",
-    },
-    {
-      icon: <Rocket className="w-6 h-6" />,
-      secondaryIcon: <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
-      title: "05 — Launch",
-      description:
-        "We handle deployment with precision — getting your product live smoothly, with zero downtime, full monitoring, and a seamless go-live experience.",
-      position: "right",
-    },
-    {
-      icon: <TrendingUp className="w-6 h-6" />,
-      secondaryIcon: <Star className="w-4 h-4 absolute -top-1 -right-1 text-[#6cbcc4]" />,
-      title: "06 — Growth & Support",
-      description:
-        "Post-launch, we monitor, optimize, and support your product — helping you iterate fast, scale confidently, and stay ahead of the curve.",
-      position: "right",
-    },
-  ]
+  useEffect(() => {
+    if (!inView) return
+    let start = 0
+    const duration = 2000
+    const increment = value / (duration / 16)
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= value) {
+        setCount(value)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(start))
+      }
+    }, 16)
+    return () => clearInterval(timer)
+  }, [inView, value])
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="w-full py-24 px-4 bg-gradient-to-b from-blue-100/35 to-white text-slate-900 overflow-hidden relative"
-    >
-      {/* Abstract Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-gradient-to-br from-pink-300/35 to-transparent rounded-full blur-2xl"></div>
-      </div>
-      {/* Decorative background blobs */}
-      <div className="relative z-10">
-      <div
-        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-[#6cbcc4]/10 blur-3xl"
-      />
-      <div
-        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-slate-300/20 blur-3xl"
-      />
-      <div
-        className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-[#6cbcc4]/40 animate-float-up"
-      />
-      <div
-        className="absolute bottom-1/3 right-1/4 w-6 h-6 rounded-full bg-[#6cbcc4]/30 animate-float-down"
-      />
-
-      <motion.div
-        layout={false}
-        className="container mx-auto max-w-6xl relative z-10"
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={containerVariants}
-      >
-        {/* Header */}
-        <motion.div layout={false} className="flex flex-col items-center mb-6" variants={itemVariants}>
-          <motion.span
-            layout={false}
-            className="text-[#6cbcc4] font-medium mb-2 flex items-center gap-2"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-          >
-            <Zap className="w-4 h-4" />
-            OUR APPROACH
-          </motion.span>
-          <h2 className="text-4xl md:text-5xl font-light mb-4 text-center text-slate-900">About Us</h2>
-          <motion.div
-            className="h-1 bg-[#6cbcc4] rounded-full"
-            initial={{ width: 0 }}
-            animate={{ width: 96 }}
-            transition={{ duration: 1.1, delay: 0.08 }}
-          />
-        </motion.div>
-
-        <motion.p className="text-center max-w-2xl mx-auto mb-16 text-slate-600" variants={itemVariants}>
-          Every project we take on follows a proven, collaborative process — from the first conversation to
-          the final launch and beyond. Here's how we go from idea to impact.
-        </motion.p>
-
-        {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Left column */}
-          <div className="space-y-16">
-            {services
-              .filter((s) => s.position === "left")
-              .map((service, index) => (
-                <ServiceItem
-                  key={`left-${index}`}
-                  icon={service.icon}
-                  secondaryIcon={service.secondaryIcon}
-                  title={service.title}
-                  description={service.description}
-                  variants={itemVariants}
-                  delay={index * 0.2}
-                  direction="left"
-                />
-              ))}
-          </div>
-
-          {/* Center image */}
-          <div className="flex justify-center items-center order-first md:order-none mb-8 md:mb-0">
-            <motion.div className="relative w-full max-w-xs" variants={itemVariants}>
-              <motion.div
-                className="rounded-md overflow-hidden shadow-xl"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-              >
-                <img
-                  src="https://picsum.photos/600/400?random=1"
-                  alt="madebysybarites team"
-                  className="w-full h-full object-cover"
-                />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent flex items-end justify-center p-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.9, delay: 0.4 }}
-                >
-                  <motion.a
-                    href="/#our-works"
-                    className="bg-white text-slate-900 px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Our Portfolio <ArrowRight className="w-4 h-4" />
-                  </motion.a>
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="absolute inset-0 border-4 border-[#6cbcc4]/40 rounded-md -m-3 z-[-1]"
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.9, delay: 0.15 }}
-              />
-
-              <motion.div
-                className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-[#6cbcc4]/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.1, delay: 0.2 }}
-              />
-              <motion.div
-                className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-[#6cbcc4]/10"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.1, delay: 0.25 }}
-              />
-
-              <div
-                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#6cbcc4] animate-float-small-up"
-              />
-              <div
-                className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#6cbcc4]/70 animate-float-small-down"
-              />
-            </motion.div>
-          </div>
-
-          {/* Right column */}
-          <div className="space-y-16">
-            {services
-              .filter((s) => s.position === "right")
-              .map((service, index) => (
-                <ServiceItem
-                  key={`right-${index}`}
-                  icon={service.icon}
-                  secondaryIcon={service.secondaryIcon}
-                  title={service.title}
-                  description={service.description}
-                  variants={itemVariants}
-                  delay={index * 0.2}
-                  direction="right"
-                />
-              ))}
-          </div>
-        </div>
-
-
-      </motion.div>
-      </div>
-    </section>
+    <span>
+      {count}
+      {suffix}
+    </span>
   )
 }
 
-interface ServiceItemProps {
-  icon: React.ReactNode
-  secondaryIcon?: React.ReactNode
-  title: string
-  description: string
-  variants: Variants
-  delay: number
-  direction: "left" | "right"
-}
+export default function AboutUsSection() {
+  const statsRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(statsRef, { once: true, margin: "-100px" })
 
-function ServiceItem({ icon, secondaryIcon, title, description, variants, delay, direction }: ServiceItemProps) {
   return (
-    <motion.div
-      className="flex flex-col group"
-      variants={variants}
-      transition={{ delay: delay * 0.5 }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-    >
-      <motion.div
-        className="flex items-center gap-3 mb-3"
-        initial={{ x: direction === "left" ? -20 : 20, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.7, delay: delay * 0.5 + 0.05 }}
-      >
-        <motion.div
-          className="text-[#6cbcc4] bg-[#6cbcc4]/10 p-3 rounded-lg transition-colors duration-300 group-hover:bg-[#6cbcc4]/20 relative"
-          whileHover={{ rotate: 8, transition: { duration: 0.2 } }}
-        >
-          {icon}
-          {secondaryIcon}
-        </motion.div>
-        <h3 className="text-xl font-medium text-slate-900 group-hover:text-[#6cbcc4] transition-colors duration-300">
-          {title}
-        </h3>
-      </motion.div>
-      <motion.p
-        className="text-sm text-slate-600 leading-relaxed pl-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: delay * 0.5 + 0.1 }}
-      >
-        {description}
-      </motion.p>
-      <motion.div
-        className="mt-3 pl-12 flex items-center text-[#6cbcc4] text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0 }}
-      >
-        <span className="flex items-center gap-1">
-          Learn more <ArrowRight className="w-3 h-3" />
-        </span>
-      </motion.div>
-    </motion.div>
+    <section id="about" className="relative py-28 md:py-36 bg-[#050505] overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute top-1/2 left-0 w-[600px] h-[600px] rounded-full bg-violet-600/5 blur-[150px] -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-cyan-600/5 blur-[120px] -translate-y-1/2 pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Left – Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="text-[12px] font-medium tracking-[0.15em] uppercase text-violet-400 mb-4">
+              About Us
+            </p>
+            <h2
+              className="text-4xl md:text-5xl font-bold tracking-[-0.03em] text-white leading-tight"
+              style={{ fontFamily: "var(--font-syne)" }}
+            >
+              We&apos;re a team that{" "}
+              <span className="text-gradient">obsesses</span>{" "}
+              over quality
+            </h2>
+            <p className="mt-6 text-[16px] text-zinc-400 leading-relaxed">
+              Sybarites is a premium digital agency specializing in crafting world-class
+              web applications, mobile apps, and AI-powered solutions. We combine design
+              excellence with engineering precision to build products that don&apos;t just
+              look beautiful — they perform.
+            </p>
+            <p className="mt-4 text-[16px] text-zinc-400 leading-relaxed">
+              From hyper-growth startups to established enterprises, we partner with
+              ambitious brands who refuse to settle for ordinary. Every pixel, every line
+              of code, every interaction is crafted with intention.
+            </p>
+
+            {/* Values */}
+            <div className="mt-10 grid grid-cols-2 gap-4">
+              {[
+                { title: "Design-First", desc: "Aesthetics that convert" },
+                { title: "Pixel Perfect", desc: "Obsessive attention to detail" },
+                { title: "Future-Proof", desc: "Scalable architecture" },
+                { title: "Results-Driven", desc: "Measurable business impact" },
+              ].map((item) => (
+                <div key={item.title} className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
+                  <p className="text-[14px] font-semibold text-white">{item.title}</p>
+                  <p className="text-[12px] text-zinc-500 mt-1">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right – Stats */}
+          <motion.div
+            ref={statsRef}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+          >
+            <div className="grid grid-cols-2 gap-5">
+              {stats.map((stat, i) => {
+                const Icon = stat.icon
+                return (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                    className="group relative p-7 rounded-2xl bg-[#0a0a0a] border border-white/[0.04] hover:border-white/[0.08] transition-all duration-500"
+                  >
+                    {/* Glow on hover */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-violet-600/5 to-cyan-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="relative">
+                      <Icon size={24} className={`${stat.color} mb-4`} strokeWidth={1.5} />
+                      <p
+                        className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+                        style={{ fontFamily: "var(--font-syne)" }}
+                      >
+                        <AnimatedCounter value={stat.value} suffix={stat.suffix} inView={isInView} />
+                      </p>
+                      <p className="text-[13px] text-zinc-500 mt-2 font-medium">{stat.label}</p>
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+
+            {/* Accent line */}
+            <div className="mt-8 h-1 w-full rounded-full bg-gradient-to-r from-violet-600 via-cyan-500 to-emerald-500 opacity-40" />
+          </motion.div>
+        </div>
+      </div>
+    </section>
   )
 }

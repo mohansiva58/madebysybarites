@@ -1,335 +1,175 @@
 "use client"
 
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useMemo,
-  useCallback,
-} from "react"
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
-interface Testimonial {
-  quote: string
-  name: string
-  designation: string
-  src: string
-}
-
-interface Colors {
-  name?: string
-  designation?: string
-  testimony?: string
-  arrowBackground?: string
-  arrowForeground?: string
-  arrowHoverBackground?: string
-}
-
-interface FontSizes {
-  name?: string
-  designation?: string
-  quote?: string
-}
-
-interface CircularTestimonialsProps {
-  testimonials: Testimonial[]
-  autoplay?: boolean
-  colors?: Colors
-  fontSizes?: FontSizes
-}
-
-function calculateGap(width: number) {
-  const minWidth = 1024
-  const maxWidth = 1456
-  const minGap = 60
-  const maxGap = 86
-  if (width <= minWidth) return minGap
-  if (width >= maxWidth) return Math.max(minGap, maxGap + 0.06018 * (width - maxWidth))
-  return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth))
-}
-
-export function CircularTestimonials({
-  testimonials,
-  autoplay = true,
-  colors = {},
-  fontSizes = {},
-}: CircularTestimonialsProps) {
-  const colorName = colors.name ?? "#0f172a"
-  const colorDesignation = colors.designation ?? "#6b7280"
-  const colorTestimony = colors.testimony ?? "#4b5563"
-  const colorArrowBg = colors.arrowBackground ?? "#141414"
-  const colorArrowFg = colors.arrowForeground ?? "#f1f1f7"
-  const colorArrowHoverBg = colors.arrowHoverBackground ?? "#6cbcc4"
-  const fontSizeName = fontSizes.name ?? "1.5rem"
-  const fontSizeDesignation = fontSizes.designation ?? "0.925rem"
-  const fontSizeQuote = fontSizes.quote ?? "1.125rem"
-
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [hoverPrev, setHoverPrev] = useState(false)
-  const [hoverNext, setHoverNext] = useState(false)
-  const [containerWidth, setContainerWidth] = useState(1200)
-
-  const imageContainerRef = useRef<HTMLDivElement>(null)
-  const autoplayIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-
-  const testimonialsLength = useMemo(() => testimonials.length, [testimonials])
-  const activeTestimonial = useMemo(() => testimonials[activeIndex], [activeIndex, testimonials])
-
-  useEffect(() => {
-    function handleResize() {
-      if (imageContainerRef.current) {
-        setContainerWidth(imageContainerRef.current.offsetWidth)
-      }
-    }
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
-
-  const handleNext = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % testimonialsLength)
-    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current)
-  }, [testimonialsLength])
-
-  const handlePrev = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + testimonialsLength) % testimonialsLength)
-    if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current)
-  }, [testimonialsLength])
-
-  useEffect(() => {
-    if (autoplay) {
-      autoplayIntervalRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonialsLength)
-      }, 5000)
-    }
-    return () => {
-      if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current)
-    }
-  }, [autoplay, testimonialsLength])
-
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") handlePrev()
-      if (e.key === "ArrowRight") handleNext()
-    }
-    window.addEventListener("keydown", handleKey)
-    return () => window.removeEventListener("keydown", handleKey)
-  }, [handlePrev, handleNext])
-
-  function getImageStyle(index: number): React.CSSProperties {
-    const gap = calculateGap(containerWidth)
-    const maxStickUp = gap * 0.8
-    const isActive = index === activeIndex
-    const isLeft = (activeIndex - 1 + testimonialsLength) % testimonialsLength === index
-    const isRight = (activeIndex + 1) % testimonialsLength === index
-    if (isActive) {
-      return {
-        zIndex: 3,
-        opacity: 1,
-        pointerEvents: "auto",
-        transform: `translateX(0px) translateY(0px) scale(1) rotateY(0deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-      }
-    }
-    if (isLeft) {
-      return {
-        zIndex: 2,
-        opacity: 1,
-        pointerEvents: "auto",
-        transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-      }
-    }
-    if (isRight) {
-      return {
-        zIndex: 2,
-        opacity: 1,
-        pointerEvents: "auto",
-        transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`,
-        transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-      }
-    }
-    return {
-      zIndex: 1,
-      opacity: 0,
-      pointerEvents: "none",
-      transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
-    }
-  }
-
-  const quoteVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-  }
-
-  return (
-    <div className="w-full max-w-4xl px-8 py-8 mx-auto">
-      <style>{`
-        @keyframes word-fade-up {
-          from {
-            opacity: 0;
-            transform: translateY(5px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .word-fade-up {
-          display: inline-block;
-          opacity: 0;
-          animation: word-fade-up 220ms ease-in-out forwards;
-        }
-      `}</style>
-      <div className="grid gap-20 md:grid-cols-2">
-        {/* Images */}
-        <div
-          ref={imageContainerRef}
-          className="relative w-full h-96"
-          style={{ perspective: "1000px" }}
-        >
-          {testimonials.map((testimonial, index) => (
-            <img
-              key={testimonial.src}
-              src={testimonial.src}
-              alt={testimonial.name}
-              className="absolute w-full h-full object-cover rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
-              style={getImageStyle(index)}
-            />
-          ))}
-        </div>
-
-        {/* Content */}
-        <div className="flex flex-col justify-between">
-          <AnimatePresence mode="wait">
-            <motion.div
-              layout={false}
-              key={activeIndex}
-              variants={quoteVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <h3 className="font-bold mb-1" style={{ color: colorName, fontSize: fontSizeName }}>
-                {activeTestimonial.name}
-              </h3>
-              <p className="mb-8" style={{ color: colorDesignation, fontSize: fontSizeDesignation }}>
-                {activeTestimonial.designation}
-              </p>
-              <motion.p className="leading-7" style={{ color: colorTestimony, fontSize: fontSizeQuote }}>
-                {activeTestimonial.quote.split(" ").map((word, i) => (
-                  <span
-                    key={i}
-                    className="word-fade-up"
-                    style={{ animationDelay: `${0.025 * i}s` }}
-                  >
-                    {word}&nbsp;
-                  </span>
-                ))}
-              </motion.p>
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="flex gap-6 pt-12 md:pt-0">
-            <button
-              onClick={handlePrev}
-              onMouseEnter={() => setHoverPrev(true)}
-              onMouseLeave={() => setHoverPrev(false)}
-              aria-label="Previous testimonial"
-              className="w-11 h-11 rounded-full flex items-center justify-center border-none cursor-pointer transition-colors duration-300"
-              style={{ backgroundColor: hoverPrev ? colorArrowHoverBg : colorArrowBg }}
-            >
-              <FaArrowLeft size={20} color={colorArrowFg} />
-            </button>
-            <button
-              onClick={handleNext}
-              onMouseEnter={() => setHoverNext(true)}
-              onMouseLeave={() => setHoverNext(false)}
-              aria-label="Next testimonial"
-              className="w-11 h-11 rounded-full flex items-center justify-center border-none cursor-pointer transition-colors duration-300"
-              style={{ backgroundColor: hoverNext ? colorArrowHoverBg : colorArrowBg }}
-            >
-              <FaArrowRight size={20} color={colorArrowFg} />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-const testimonials: Testimonial[] = [
+const testimonials = [
   {
-    quote:
-      "Working with madebysybarites was an absolute pleasure. They rebranded our entire online presence — from logo to website — and the results exceeded every expectation. Our inquiries doubled within the first month.",
-    name: "Venkat Atluri",
-    designation: "Founder, Atluri Events",
-    src: "https://picsum.photos/400/400?random=1",
+    name: "Abhishek Reddy",
+    role: "Founder, TFS Finserv",
+    image: "/professional-headshot-1.png",
+    rating: 5,
+    text: "Sybarites delivered beyond our expectations. The fintech app they built for us is not only visually stunning but performs flawlessly under load. Their attention to detail and commitment to quality is unmatched.",
   },
   {
-    quote:
-      "The team at madebysybarites delivered our e-commerce platform ahead of schedule with zero bugs at launch. Their attention to detail and communication throughout was top-notch. Truly a world-class team.",
-    name: "Ravi Kumar",
-    designation: "CEO, Akepatimart",
-    src: "https://picsum.photos/400/400?random=2",
+    name: "Karim Oumran",
+    role: "CEO, Atluri Events",
+    image: "/professional-headshot-2.png",
+    rating: 5,
+    text: "Working with Sybarites transformed our online presence. The event management website they created has dramatically increased our bookings. Professional, responsive, and truly talented team.",
   },
   {
-    quote:
-      "We needed an app that felt premium and performed flawlessly. madebysybarites nailed it on the first try. The UI is stunning, and our users love the experience. Couldn't recommend them more.",
     name: "Priya Sharma",
-    designation: "Co-Founder, Rofero",
-    src: "https://picsum.photos/400/400?random=3",
+    role: "Product Lead, Akepatimart",
+    image: "/professional-headshot-3.png",
+    rating: 5,
+    text: "The e-commerce platform Sybarites built for us handles thousands of transactions daily without a hitch. Their technical expertise combined with design sensibility makes them the perfect tech partner.",
   },
   {
-    quote:
-      "From day one, madebysybarites treated our project like their own. They translated our rough ideas into a beautiful, functional product — fast. The post-launch support has been incredible too.",
-    name: "Arjun Mehta",
-    designation: "Director, Wonderkids",
-    src: "https://picsum.photos/400/400?random=4",
+    name: "David Chen",
+    role: "CTO, Wonderkids",
+    image: "/professional-man-headshot.png",
+    rating: 5,
+    text: "Sybarites created an engaging learning platform that both kids and parents love. Their ability to balance fun design with robust functionality shows their deep understanding of user experience.",
+  },
+  {
+    name: "Sarah Mitchell",
+    role: "Director, ROFERO",
+    image: "/professional-woman-headshot.png",
+    rating: 5,
+    text: "Our clothing brand website by Sybarites is a work of art. The smooth animations, premium feel, and conversion optimization have elevated our brand to a whole new level. Highly recommend!",
   },
 ]
 
 export default function TestimonialsSection() {
-  return (
-    <section className="w-full py-24 px-4 bg-gradient-to-b from-blue-100/40 to-white overflow-hidden relative">
-      {/* Abstract Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-purple-300/40 via-pink-200/35 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 left-1/3 w-96 h-96 bg-gradient-to-tr from-blue-300/35 via-purple-300/30 to-transparent rounded-full blur-3xl"></div>
-      </div>
-      
-      <div className="container mx-auto max-w-6xl relative z-10">
-        <div className="flex flex-col items-center mb-16">
-          <span className="text-[#6cbcc4] font-medium mb-2 flex items-center gap-2 text-sm uppercase tracking-widest">
-            ★ Client Stories
-          </span>
-          <h2 className="text-4xl md:text-5xl font-light text-center text-slate-900 mb-4">
-            What Our Clients Say
-          </h2>
-          <div className="h-1 w-24 bg-[#6cbcc4] rounded-full" />
-        </div>
+  const [current, setCurrent] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
-        <div className="flex justify-center">
-          <CircularTestimonials
-            testimonials={testimonials}
-            autoplay={true}
-            colors={{
-              name: "#0f172a",
-              designation: "#6b7280",
-              testimony: "#4b5563",
-              arrowBackground: "#0f172a",
-              arrowForeground: "#ffffff",
-              arrowHoverBackground: "#6cbcc4",
-            }}
-            fontSizes={{
-              name: "1.4rem",
-              designation: "0.875rem",
-              quote: "1rem",
-            }}
-          />
+  const next = useCallback(() => {
+    setCurrent((prev) => (prev + 1) % testimonials.length)
+  }, [])
+
+  const prev = useCallback(() => {
+    setCurrent((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }, [])
+
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setInterval(next, 5000)
+    return () => clearInterval(timer)
+  }, [isPaused, next])
+
+  return (
+    <section className="relative py-28 md:py-36 bg-[#050505] overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-violet-600/5 blur-[180px] pointer-events-none" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <p className="text-[12px] font-medium tracking-[0.15em] uppercase text-amber-400 mb-4">
+            Testimonials
+          </p>
+          <h2
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-white"
+            style={{ fontFamily: "var(--font-syne)" }}
+          >
+            What Clients{" "}
+            <span className="text-gradient">Say</span>
+          </h2>
+        </motion.div>
+
+        {/* Testimonial Card */}
+        <div
+          className="relative max-w-4xl mx-auto"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="relative p-8 md:p-12 rounded-3xl bg-[#0a0a0a] border border-white/[0.04]"
+            >
+              {/* Quote icon */}
+              <Quote size={48} className="text-violet-500/10 absolute top-8 right-8" />
+
+              {/* Stars */}
+              <div className="flex gap-1 mb-6">
+                {Array.from({ length: testimonials[current].rating }).map((_, i) => (
+                  <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+
+              {/* Quote text */}
+              <p className="text-lg md:text-xl text-zinc-300 leading-relaxed mb-8 font-light max-w-3xl">
+                &ldquo;{testimonials[current].text}&rdquo;
+              </p>
+
+              {/* Author */}
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+                  <img
+                    src={testimonials[current].image}
+                    alt={testimonials[current].name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p className="text-[15px] font-semibold text-white">
+                    {testimonials[current].name}
+                  </p>
+                  <p className="text-[13px] text-zinc-500">
+                    {testimonials[current].role}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation */}
+          <div className="flex items-center justify-between mt-8">
+            {/* Dots */}
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`transition-all duration-300 rounded-full ${
+                    i === current
+                      ? "w-8 h-2 bg-gradient-to-r from-violet-500 to-cyan-500"
+                      : "w-2 h-2 bg-zinc-700 hover:bg-zinc-600"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Arrows */}
+            <div className="flex gap-2">
+              <button
+                onClick={prev}
+                className="p-2.5 rounded-full border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.03] transition-all duration-300 text-zinc-400 hover:text-white"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={next}
+                className="p-2.5 rounded-full border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.03] transition-all duration-300 text-zinc-400 hover:text-white"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
