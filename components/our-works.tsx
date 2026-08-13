@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowUpRight, Github } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 const projects = [
   {
@@ -43,6 +43,15 @@ const projects = [
     tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
     live: "https://wonderkids.great-site.net/?i=1",
     color: "#F59E0B",
+  },
+  {
+    title: "Leena by Alekhya",
+    subtitle: "Women's Clothing",
+    description: "A refined fashion storefront for women's clothing, bringing product discovery, collection storytelling, and a polished shopping journey together.",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-YOlBoW2ix9Xlpd6m9A6zX9JSpngw7v.png",
+    tags: ["E-Commerce", "Brand Design", "Next.js", "Responsive UI"],
+    live: "https://leenabyalekhya.in",
+    color: "#9A8066",
   },
 ]
 
@@ -94,16 +103,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                   Visit Site <ArrowUpRight size={14} />
                 </a>
               )}
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors"
-                >
-                  <Github size={18} />
-                </a>
-              )}
+
             </div>
           </div>
         </div>
@@ -162,17 +162,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
                 View Live
               </a>
             )}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 px-6 py-3 rounded-full text-[13px] font-semibold text-zinc-400 border border-white/[0.06] hover:text-white hover:border-white/[0.12] transition-all duration-300"
-              >
-                <Github size={15} />
-                Source
-              </a>
-            )}
+
           </div>
         </div>
       </div>

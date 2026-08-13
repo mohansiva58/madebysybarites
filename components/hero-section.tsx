@@ -26,7 +26,7 @@ export function HeroSection() {
       <div className="section-shell relative min-h-[calc(100vh-2rem)]">
         <motion.div style={{ y, opacity }} className="grid items-end gap-16 pb-20 lg:grid-cols-[1.15fr_.85fr] lg:pb-28">
           <div>
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }} className="eyebrow mb-7 flex items-center gap-2"><Sparkles data-icon="inline-start" /> Independent digital studio</motion.div>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }} className="eyebrow mb-7 flex items-center gap-2"><Sparkles data-icon="inline-start" /> Code. Design. Deploy.</motion.div>
             <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3, duration: .8 }} className="max-w-4xl font-display text-6xl font-semibold leading-[.94] tracking-[-.06em] text-foreground sm:text-7xl md:text-8xl lg:text-[7.6rem]">We make digital products people <span className="text-[#ae8754]">remember.</span></motion.h1>
             <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .55 }} className="mt-8 max-w-xl text-base leading-7 text-muted-foreground md:text-lg">From sharp strategy to thoughtful design and clean engineering, we turn ambitious ideas into products with staying power.</motion.p>
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .7 }} className="mt-9 flex flex-wrap items-center gap-3">

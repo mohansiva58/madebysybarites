@@ -6,7 +6,7 @@ export function SiteFooter() {
       {/* Background Watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <span 
-          className="text-[12rem] md:text-[20rem] font-bold text-black/[0.03] whitespace-nowrap"
+          className="w-full text-center text-[clamp(4.5rem,19vw,19rem)] font-bold leading-none tracking-[-0.08em] text-black/[0.03] whitespace-nowrap"
           style={{ fontFamily: "var(--font-syne)" }}
         >
           Sybarites
@@ -84,7 +84,7 @@ export function SiteFooter() {
               Stay ahead with design & marketing<br/>tips and strategies that drive results.
             </p>
             
-            <form className="flex items-center gap-3 max-w-[320px]" onSubmit={(e) => e.preventDefault()}>
+            <form className="flex max-w-[320px] flex-col items-stretch gap-3 sm:flex-row sm:items-center" onSubmit={(e) => e.preventDefault()}>
               <div className="relative flex-1">
                 <input 
                   type="email" 
@@ -94,7 +94,7 @@ export function SiteFooter() {
               </div>
               <button 
                 type="submit"
-                className="text-black font-semibold text-[14px] hover:opacity-70 transition-opacity whitespace-nowrap"
+                className="rounded-lg bg-white px-4 py-3.5 text-[14px] font-semibold text-black shadow-sm transition-opacity hover:opacity-80 whitespace-nowrap"
               >
                 Subscribe
               </button>
