@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import { SiteFooter } from "./site-footer"
 import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react"
 import {
   FaXTwitter,
@@ -115,130 +116,7 @@ export function CTAFooter() {
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="relative bg-[#030303] border-t border-white/[0.04]">
-        {/* Gradient border at top */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
-
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-            {/* Brand */}
-            <div className="lg:col-span-1">
-              <Link href="/" className="inline-block mb-5">
-                <img
-                  src="/works/madebysybariteslogo.png"
-                  alt="Sybarites"
-                  className="h-10 w-auto object-contain"
-                />
-              </Link>
-              <p className="text-[14px] text-zinc-500 leading-relaxed max-w-xs">
-                Premium digital agency crafting world-class web applications, mobile apps,
-                and AI-powered solutions.
-              </p>
-
-              {/* Contact Info */}
-              <div className="mt-6 space-y-3">
-                <a href="mailto:hello@sybarites.dev" className="flex items-center gap-3 text-[13px] text-zinc-500 hover:text-zinc-300 transition-colors">
-                  <Mail size={14} />
-                  hello@sybarites.dev
-                </a>
-                <a href="https://wa.me/919701630276" className="flex items-center gap-3 text-[13px] text-zinc-500 hover:text-zinc-300 transition-colors">
-                  <Phone size={14} />
-                  +91 970 163 0276
-                </a>
-                <div className="flex items-center gap-3 text-[13px] text-zinc-500">
-                  <MapPin size={14} />
-                  India
-                </div>
-              </div>
-            </div>
-
-            {/* Services */}
-            <div>
-              <h4 className="text-[12px] font-semibold tracking-[0.15em] uppercase text-zinc-300 mb-5">
-                Services
-              </h4>
-              <ul className="space-y-3">
-                {footerLinks.services.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[14px] text-zinc-500 hover:text-white transition-colors duration-300"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Company */}
-            <div>
-              <h4 className="text-[12px] font-semibold tracking-[0.15em] uppercase text-zinc-300 mb-5">
-                Company
-              </h4>
-              <ul className="space-y-3">
-                {footerLinks.company.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[14px] text-zinc-500 hover:text-white transition-colors duration-300"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Social */}
-            <div>
-              <h4 className="text-[12px] font-semibold tracking-[0.15em] uppercase text-zinc-300 mb-5">
-                Connect
-              </h4>
-              <div className="flex gap-3">
-                {footerLinks.socials.map((social) => {
-                  const Icon = social.icon
-                  return (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={social.label}
-                      className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.06] text-zinc-500 hover:text-white hover:border-white/[0.12] hover:bg-white/[0.08] transition-all duration-300"
-                    >
-                      <Icon size={16} />
-                    </a>
-                  )
-                })}
-              </div>
-
-              {/* Newsletter hint */}
-              <div className="mt-8 p-5 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                <p className="text-[13px] font-medium text-zinc-300 mb-1">Stay updated</p>
-                <p className="text-[12px] text-zinc-500">
-                  Follow us on social media for the latest projects and insights.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom bar */}
-          <div className="mt-16 pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[13px] text-zinc-600">
-              © {new Date().getFullYear()} Sybarites. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              <Link href="#" className="text-[13px] text-zinc-600 hover:text-zinc-400 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="#" className="text-[13px] text-zinc-600 hover:text-zinc-400 transition-colors">
-                Terms of Service
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   )
 }
