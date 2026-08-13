@@ -1,175 +1,49 @@
 "use client"
 
-import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowUpRight, Sparkles } from "lucide-react"
+import { ArrowDownRight, ArrowUpRight, Sparkles } from "lucide-react"
+import { useRef } from "react"
 
 const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "24/7", label: "Support" },
+  { value: "50+", label: "Projects delivered" },
+  { value: "98%", label: "Client satisfaction" },
+  { value: "24/7", label: "Support when it matters" },
 ]
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  })
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
+  const y = useTransform(scrollYProgress, [0, 1], [0, 110])
+  const opacity = useTransform(scrollYProgress, [0, .7], [1, 0])
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95])
-
-  const handleGetStarted = () => {
-    const message = "Hi! I'm interested in your services. Let's discuss my project."
-    const encodedMessage = encodeURIComponent(message)
-    window.open(`https://wa.me/919701630276?text=${encodedMessage}`, "_blank")
+  const handleStart = () => {
+    const message = encodeURIComponent("Hi! I'm interested in your services. Let's discuss my project.")
+    window.open(`https://wa.me/919701630276?text=${message}`, "_blank")
   }
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-screen overflow-hidden bg-[#050505]">
-      {/* Animated Background Gradient Mesh */}
-      <div className="absolute inset-0">
-        {/* Primary glow */}
-        <div
-          className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] rounded-full opacity-30"
-          style={{
-            background: "radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%)",
-            animation: "gradient-shift 15s ease-in-out infinite",
-          }}
-        />
-        {/* Cyan accent glow */}
-        <div
-          className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full opacity-25"
-          style={{
-            background: "radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 70%)",
-            animation: "gradient-shift-reverse 18s ease-in-out infinite",
-          }}
-        />
-        {/* Subtle center glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full opacity-10"
-          style={{
-            background: "radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 60%)",
-          }}
-        />
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
-      </div>
-
-      {/* Noise Overlay */}
-      <div className="absolute inset-0 noise-overlay pointer-events-none" />
-
-      {/* Content */}
-      <motion.div
-        style={{ y, opacity, scale }}
-        className="relative z-10 h-screen flex flex-col items-center justify-center px-6 md:px-12 lg:px-16"
-      >
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm">
-            <Sparkles size={14} className="text-violet-400" />
-            <span className="text-[12px] font-medium tracking-[0.1em] uppercase text-zinc-400">
-              Premium Digital Agency
-            </span>
+    <section ref={ref} className="relative overflow-hidden border-b border-border bg-white pt-32 md:pt-40">
+      <div className="section-shell relative min-h-[calc(100vh-2rem)]">
+        <motion.div style={{ y, opacity }} className="grid items-end gap-16 pb-20 lg:grid-cols-[1.15fr_.85fr] lg:pb-28">
+          <div>
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .2 }} className="eyebrow mb-7 flex items-center gap-2"><Sparkles data-icon="inline-start" /> Independent digital studio</motion.div>
+            <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .3, duration: .8 }} className="max-w-4xl font-display text-6xl font-semibold leading-[.94] tracking-[-.06em] text-foreground sm:text-7xl md:text-8xl lg:text-[7.6rem]">We make digital products people <span className="text-[#ae8754]">remember.</span></motion.h1>
+            <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .55 }} className="mt-8 max-w-xl text-base leading-7 text-muted-foreground md:text-lg">From sharp strategy to thoughtful design and clean engineering, we turn ambitious ideas into products with staying power.</motion.p>
+            <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .7 }} className="mt-9 flex flex-wrap items-center gap-3">
+              <button onClick={handleStart} className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-transform hover:-translate-y-1">Start your project <ArrowUpRight data-icon="inline-end" /></button>
+              <a href="#projects" className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary">Explore the work <ArrowDownRight data-icon="inline-end" /></a>
+            </motion.div>
           </div>
-        </motion.div>
-
-        {/* Main Heading */}
-        <div className="text-center max-w-5xl mx-auto">
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl md:text-7xl lg:text-8xl xl:text-[6.5rem] font-bold tracking-[-0.03em] leading-[0.9] text-white"
-            style={{ fontFamily: "var(--font-syne)" }}
-          >
-            We Build{" "}
-            <span className="text-gradient">Digital</span>
-            <br />
-            <span className="text-gradient">Experiences</span>{" "}
-            That Matter
-          </motion.h1>
-
-          {/* Subheading */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-8 text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light"
-          >
-            From stunning websites to AI-powered applications, we craft scalable
-            products that elevate your brand and drive measurable results.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="mt-10 flex flex-col sm:flex-row gap-4 items-center justify-center"
-          >
-            <button
-              onClick={handleGetStarted}
-              className="group relative px-8 py-4 rounded-full text-[15px] font-semibold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(139,92,246,0.3)]"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-violet-600 to-cyan-500 rounded-full" />
-              <span className="absolute inset-0 bg-gradient-to-r from-violet-500 to-cyan-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <span className="relative flex items-center gap-2">
-                Start Your Project
-                <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </span>
-            </button>
-
-            <a href="#projects">
-              <button className="px-8 py-4 rounded-full text-[15px] font-medium text-zinc-300 border border-white/10 hover:border-white/20 hover:bg-white/[0.03] transition-all duration-300 hover:scale-105">
-                View Our Work
-              </button>
-            </a>
+          <motion.div initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .45, duration: .9 }} className="relative min-h-80 overflow-hidden rounded-[1.5rem] border border-border bg-[#f1eee8] p-7 md:p-10">
+            <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[.16em] text-muted-foreground"><span>Studio note / 001</span><span>2024—Now</span></div>
+            <div className="flex h-full min-h-60 items-end"><p className="max-w-sm font-display text-3xl leading-tight tracking-[-.04em] text-foreground md:text-4xl">Good work is quiet at first. Then it becomes the standard.</p></div>
+            <div className="absolute -right-8 -top-8 size-36 rounded-full border border-[#c7b79f]" /><div className="absolute -right-1 -top-1 size-20 rounded-full bg-[#ddcdb5]" />
           </motion.div>
-        </div>
-
-        {/* Bottom Stats Strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="absolute bottom-12 left-0 right-0 flex justify-center"
-        >
-          <div className="flex items-center gap-8 md:gap-16">
-            {stats.map((stat, i) => (
-              <div key={stat.label} className="flex items-center gap-8 md:gap-16">
-                <div className="text-center">
-                  <p className="text-2xl md:text-3xl font-bold text-white" style={{ fontFamily: "var(--font-syne)" }}>
-                    {stat.value}
-                  </p>
-                  <p className="text-[11px] font-medium tracking-[0.08em] uppercase text-zinc-500 mt-1">
-                    {stat.label}
-                  </p>
-                </div>
-                {i < stats.length - 1 && (
-                  <div className="w-px h-8 bg-white/10" />
-                )}
-              </div>
-            ))}
-          </div>
         </motion.div>
-      </motion.div>
-
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent z-20 pointer-events-none" />
-    </div>
+        <div className="grid border-t border-border py-6 sm:grid-cols-3">
+          {stats.map((stat, i) => <div key={stat.label} className={`flex items-center justify-between gap-4 py-3 sm:px-6 ${i > 0 ? "border-t border-border sm:border-l sm:border-t-0" : ""}`}><span className="font-display text-3xl tracking-tight text-foreground">{stat.value}</span><span className="max-w-28 text-right text-xs leading-5 text-muted-foreground">{stat.label}</span></div>)}
+        </div>
+      </div>
+    </section>
   )
 }
