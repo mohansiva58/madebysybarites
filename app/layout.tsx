@@ -26,7 +26,30 @@ export const metadata: Metadata = {
   title: "Sybarites | Premium Digital Agency & Software Solutions",
   description:
     "We design, build, and scale world-class digital products. From stunning websites to AI-powered applications — Sybarites is your trusted tech partner for premium software solutions.",
-  keywords: ["digital agency", "software solutions", "web development", "mobile apps", "UI/UX design", "AI solutions", "tech partner", "premium software", "Sybarites"],
+  keywords: [
+    "Sybarites",
+    "made by Sybarites",
+    "premium digital agency",
+    "web design agency",
+    "web development company",
+    "Next.js development agency",
+    "UI UX design studio",
+    "SaaS product design",
+    "ecommerce website development",
+    "AI product development",
+    "software solutions company",
+    "brand strategy agency",
+    "digital transformation partner",
+    "best web design agency in India",
+    "custom website design and development",
+  ],
+  metadataBase: new URL("https://madebysybarites.tech"),
+  alternates: {
+    canonical: "/",
+  },
+  verification: {
+    google: "PdwT7y19BvUsH0qzJQBrqG_aois94qcfSKImEYsFlbw",
+  },
   authors: [{ name: "Sybarites" }],
   openGraph: {
     title: "Sybarites | Premium Digital Agency & Software Solutions",
@@ -71,6 +94,20 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="font-sans antialiased bg-background text-foreground" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name: "Sybarites",
+              url: "https://madebysybarites.tech",
+              description: "Premium web design, development, branding, and software solutions for ambitious businesses.",
+              areaServed: "Worldwide",
+              serviceType: ["Web Design", "Web Development", "UI/UX Design", "SaaS Development", "Brand Strategy"],
+            }),
+          }}
+        />
         <SmoothScroll />
         {children}
         <Analytics />
