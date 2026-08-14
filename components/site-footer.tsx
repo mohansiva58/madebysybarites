@@ -105,9 +105,10 @@ export function SiteFooter() {
 
         {/* Bottom bar */}
         <div className="mt-24 pt-6 border-t border-gray-100">
-          <p className="text-[13px] text-gray-500">
-            ©2025 madebysybarites All rights reserved
-          </p>
+          <div className="flex flex-col gap-2 text-[13px] text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+            <p>©2025 madebysybarites All rights reserved</p>
+            <p aria-label="Website analytics status">Website visits tracked with Vercel Analytics</p>
+          </div>
         </div>
       </div>
     </footer>
