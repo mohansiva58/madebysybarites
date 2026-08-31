@@ -27,10 +27,7 @@ const clients = [
     name: "SaaS King",
     logo: "/works/logo2.png",
   },
-  {
-    name: "Bujji Gadu Biryani",
-    logo: "/clients/image.png",
-  },
+  
 ]
 
 // Four copies = seamless continuous movement
