@@ -246,6 +246,7 @@ The goal is to make every interaction feel intentional.
 
 **Website:** https://www.sybarites.tech/  
 **GitHub:** https://github.com/mohansiva58/madebysybarites.git
+
 **Instagram:** https://www.instagram.com/sybarites.tech?igsi=MXJlNGw5eTAwZHphcw==
 
 
