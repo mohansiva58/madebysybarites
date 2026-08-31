@@ -7,12 +7,14 @@ const services = [
   [Globe, "Web Development", "Scalable, performant web applications built with modern frameworks."],
   [Smartphone, "App Development", "Native and cross-platform mobile apps with seamless experiences."],
   [Cpu, "AI Applications", "Intelligent solutions that automate, clarify, and create new possibilities."],
+  [Layout, "Voice agents", "Conversational AI that provides natural, human-like interactions."],
+  [TrendingUp, "Personalized RAG applications", "Custom retrieval-augmented generation solutions that deliver relevant, context-aware responses."],
   [Palette, "UI/UX Design", "User-centered interfaces where every detail earns its place."],
   [Layout, "Landing Pages", "High-converting pages designed to make the next step obvious."],
   [Search, "SEO Optimization", "Data-driven strategies that grow your visibility over time."],
   [PenTool, "Brand Identity", "Visual systems that give your story a distinct point of view."],
   [Zap, "Rapid MVPs", "Production-ready MVPs that help you validate without compromise."],
-  [TrendingUp, "Digital Marketing", "Full-funnel thinking that turns attention into momentum."],
+  [PenTool, "Logo Designing", "Memorable logos that capture the essence of your brand and resonate with your audience."],
 ] as const
 
 export default function ServicesSection() {

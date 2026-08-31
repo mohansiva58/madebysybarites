@@ -36,8 +36,10 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section id="process" className="relative py-28 md:py-36 bg-[#050505] overflow-hidden">
-      {/* Background */}
+<section
+  id="process"
+  className="relative pt-12 pb-24 md:pt-16 md:pb-32 bg-[#050505] overflow-hidden"
+>      {/* Background */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-violet-600/3 blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12">
@@ -47,8 +49,7 @@ export function ProcessSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
+          className="text-center mb-10 md:mb-12"        >
           <p className="text-[12px] font-medium tracking-[0.15em] uppercase text-emerald-400 mb-4">
             Our Process
           </p>

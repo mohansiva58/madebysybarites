@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion"
 import { Code2, Palette, Rocket, Users } from "lucide-react"
 
 const stats = [
-  { icon: Rocket, value: 50, suffix: "+", label: "Projects Launched", color: "text-violet-400" },
+  { icon: Rocket, value: 15, suffix: "+", label: "Projects Launched", color: "text-violet-400" },
   { icon: Users, value: 30, suffix: "+", label: "Happy Clients", color: "text-cyan-400" },
   { icon: Code2, value: 15, suffix: "+", label: "Technologies", color: "text-emerald-400" },
   { icon: Palette, value: 100, suffix: "%", label: "Client Retention", color: "text-amber-400" },

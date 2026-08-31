@@ -5,7 +5,7 @@ import { ArrowDownRight, ArrowUpRight, Sparkles } from "lucide-react"
 import { useRef } from "react"
 
 const stats = [
-  { value: "50+", label: "Projects delivered" },
+  { value: "15+", label: "Projects delivered" },
   { value: "98%", label: "Client satisfaction" },
   { value: "24/7", label: "Support when it matters" },
 ]

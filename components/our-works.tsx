@@ -4,13 +4,18 @@ import { useRef } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
+import bujjiImage from "../public/clients/image.png"
+import atluri from "../public/clients/atluti.png"
+import music from "../public/clients/music.png"
+import rofero from "../public/clients/rofero.png"
+import wonderkids from "../public/clients/wonderkids.png"
 
 const projects = [
   {
     title: "ROFERO",
     subtitle: "Clothing Brand",
     description: "Premium clothing brand website with modern UI/UX, smooth animations, and immersive product showcases. Built for conversion and brand elevation.",
-    image: "/works/project1.png",
+    image: rofero,
     tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
     live: "https://clothingbrand-nu.vercel.app/",
     github: "https://github.com/mohansiva58/Rofero",
@@ -20,7 +25,7 @@ const projects = [
     title: "Atluri Events",
     subtitle: "Event Management",
     description: "Visually captivating event management platform with service sections, photo galleries, and testimonials. Designed to inspire and convert.",
-    image: "/works/project2.png",
+    image: atluri,
     tags: ["React", "Tailwind CSS", "Framer Motion", "Node.js"],
     live: "https://atlurievents.in/",
     github: "https://github.com/mohansiva58/attuluri-events",
@@ -39,7 +44,7 @@ const projects = [
     title: "Wonderkids",
     subtitle: "Learning Platform",
     description: "Engaging and colorful interactive education platform for children featuring activities, games, and learning modules.",
-    image: "/works/project4.png",
+    image: wonderkids,
     tags: ["React", "Tailwind CSS", "Framer Motion", "TypeScript"],
     live: "https://wonderkids.great-site.net/?i=1",
     color: "#F59E0B",
@@ -51,6 +56,15 @@ const projects = [
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-YOlBoW2ix9Xlpd6m9A6zX9JSpngw7v.png",
     tags: ["E-Commerce", "Brand Design", "Next.js", "Responsive UI"],
     live: "https://leenabyalekhya.in",
+    color: "#9A8066",
+  },
+  {
+    title: "Bujji Gadu Biryani",
+    subtitle: "Food Delivery",
+    description: "A delightful food delivery service that brings the taste of authentic Biryani right to your doorstep.",
+    image: bujjiImage,
+    tags: ["E-Commerce", "Brand Design", "Next.js", "Responsive UI"],
+    live: "https://www.bujjigadubiryani.shop/",
     color: "#9A8066",
   },
 ]
@@ -172,8 +186,10 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
 export function OurWorks() {
   return (
-    <section id="projects" className="relative py-28 md:py-36 bg-[#050505] overflow-hidden">
-      {/* Background glow */}
+<section
+  id="projects"
+  className="relative pt-12 pb-24 md:pt-16 md:pb-32 bg-[#050505] overflow-hidden"
+>{/* Background glow */}
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full bg-violet-600/5 blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
@@ -183,8 +199,7 @@ export function OurWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
-        >
+          className="text-center mb-12 md:mb-14"      >
           <p className="text-[12px] font-medium tracking-[0.15em] uppercase text-cyan-400 mb-4">
             Our Portfolio
           </p>

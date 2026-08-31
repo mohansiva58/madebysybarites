@@ -34,7 +34,7 @@ export function Header() {
       <motion.header initial={{ y: -30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: .7 }} className="fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-8">
         <div className={`mx-auto flex max-w-7xl items-center justify-between px-1 transition-all duration-500 ${isScrolled ? "rounded-full border border-border bg-white/90 px-4 py-2 shadow-[0_10px_35px_rgba(38,34,29,0.08)] backdrop-blur-md" : ""}`}>
           <Link href="/" className="relative z-10 flex items-center gap-3" aria-label="Sybarites home">
-            <img src="/favicon.png" alt="Sybarites" className="h-10 w-auto object-contain" />
+            <img src="/favicon.png" alt="Sybarites" className="h-15 w-auto object-contain" />
             <span className="hidden text-sm font-semibold tracking-[0.08em] text-foreground sm:block">SYBARITES</span>
           </Link>
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
